@@ -1,0 +1,336 @@
+###############################################################################
+#                                                                             #
+# IAR ELF Linker V6.70.1.5641/W32 for ARM               11/Oct/2014  18:55:02 #
+# Copyright 2007-2013 IAR Systems AB.                                         #
+#                                                                             #
+#    Output file  =  F:\workspaces\Two_Boards_PWM_IO\TIM_F0_PWM_Output\Projec #
+#                    ts\EWARM\TIM_F0_PWM_Output Configuration\Exe\TIM_F0_PWM_ #
+#                    Output Configuration.out                                 #
+#    Map file     =  F:\workspaces\Two_Boards_PWM_IO\TIM_F0_PWM_Output\Projec #
+#                    ts\EWARM\TIM_F0_PWM_Output Configuration/List\TIM_F0_PWM #
+#                    _Output Configuration.map                                #
+#    Command line =  "F:\workspaces\Two_Boards_PWM_IO\TIM_F0_PWM_Output\Proje #
+#                    cts\EWARM\TIM_F0_PWM_Output Configuration\Obj\main.o"    #
+#                    "F:\workspaces\Two_Boards_PWM_IO\TIM_F0_PWM_Output\Proje #
+#                    cts\EWARM\TIM_F0_PWM_Output                              #
+#                    Configuration\Obj\startup_stm32f051x8.o"                 #
+#                    "F:\workspaces\Two_Boards_PWM_IO\TIM_F0_PWM_Output\Proje #
+#                    cts\EWARM\TIM_F0_PWM_Output                              #
+#                    Configuration\Obj\stm32f0xx_hal.o"                       #
+#                    "F:\workspaces\Two_Boards_PWM_IO\TIM_F0_PWM_Output\Proje #
+#                    cts\EWARM\TIM_F0_PWM_Output                              #
+#                    Configuration\Obj\stm32f0xx_hal_cortex.o"                #
+#                    "F:\workspaces\Two_Boards_PWM_IO\TIM_F0_PWM_Output\Proje #
+#                    cts\EWARM\TIM_F0_PWM_Output                              #
+#                    Configuration\Obj\stm32f0xx_hal_dma.o"                   #
+#                    "F:\workspaces\Two_Boards_PWM_IO\TIM_F0_PWM_Output\Proje #
+#                    cts\EWARM\TIM_F0_PWM_Output                              #
+#                    Configuration\Obj\stm32f0xx_hal_flash.o"                 #
+#                    "F:\workspaces\Two_Boards_PWM_IO\TIM_F0_PWM_Output\Proje #
+#                    cts\EWARM\TIM_F0_PWM_Output                              #
+#                    Configuration\Obj\stm32f0xx_hal_flash_ex.o"              #
+#                    "F:\workspaces\Two_Boards_PWM_IO\TIM_F0_PWM_Output\Proje #
+#                    cts\EWARM\TIM_F0_PWM_Output                              #
+#                    Configuration\Obj\stm32f0xx_hal_gpio.o"                  #
+#                    "F:\workspaces\Two_Boards_PWM_IO\TIM_F0_PWM_Output\Proje #
+#                    cts\EWARM\TIM_F0_PWM_Output                              #
+#                    Configuration\Obj\stm32f0xx_hal_msp.o"                   #
+#                    "F:\workspaces\Two_Boards_PWM_IO\TIM_F0_PWM_Output\Proje #
+#                    cts\EWARM\TIM_F0_PWM_Output                              #
+#                    Configuration\Obj\stm32f0xx_hal_pwr.o"                   #
+#                    "F:\workspaces\Two_Boards_PWM_IO\TIM_F0_PWM_Output\Proje #
+#                    cts\EWARM\TIM_F0_PWM_Output                              #
+#                    Configuration\Obj\stm32f0xx_hal_pwr_ex.o"                #
+#                    "F:\workspaces\Two_Boards_PWM_IO\TIM_F0_PWM_Output\Proje #
+#                    cts\EWARM\TIM_F0_PWM_Output                              #
+#                    Configuration\Obj\stm32f0xx_hal_rcc.o"                   #
+#                    "F:\workspaces\Two_Boards_PWM_IO\TIM_F0_PWM_Output\Proje #
+#                    cts\EWARM\TIM_F0_PWM_Output                              #
+#                    Configuration\Obj\stm32f0xx_hal_rcc_ex.o"                #
+#                    "F:\workspaces\Two_Boards_PWM_IO\TIM_F0_PWM_Output\Proje #
+#                    cts\EWARM\TIM_F0_PWM_Output                              #
+#                    Configuration\Obj\stm32f0xx_hal_tim.o"                   #
+#                    "F:\workspaces\Two_Boards_PWM_IO\TIM_F0_PWM_Output\Proje #
+#                    cts\EWARM\TIM_F0_PWM_Output                              #
+#                    Configuration\Obj\stm32f0xx_hal_tim_ex.o"                #
+#                    "F:\workspaces\Two_Boards_PWM_IO\TIM_F0_PWM_Output\Proje #
+#                    cts\EWARM\TIM_F0_PWM_Output                              #
+#                    Configuration\Obj\stm32f0xx_it.o"                        #
+#                    "F:\workspaces\Two_Boards_PWM_IO\TIM_F0_PWM_Output\Proje #
+#                    cts\EWARM\TIM_F0_PWM_Output                              #
+#                    Configuration\Obj\system_stm32f0xx.o" --redirect         #
+#                    _Printf=_PrintfFull --redirect _Scanf=_ScanfFull -o      #
+#                    "F:\workspaces\Two_Boards_PWM_IO\TIM_F0_PWM_Output\Proje #
+#                    cts\EWARM\TIM_F0_PWM_Output                              #
+#                    Configuration\Exe\TIM_F0_PWM_Output Configuration.out"   #
+#                    --map "F:\workspaces\Two_Boards_PWM_IO\TIM_F0_PWM_Output #
+#                    \Projects\EWARM\TIM_F0_PWM_Output                        #
+#                    Configuration/List\TIM_F0_PWM_Output Configuration.map"  #
+#                    --config "C:\Program Files (x86)\IAR Systems\Embedded    #
+#                    Workbench 7.0_2\arm\config\linker\ST\stm32f051x8.icf"    #
+#                    --semihosting --entry __iar_program_start --vfe          #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+*******************************************************************************
+*** RUNTIME MODEL ATTRIBUTES
+***
+
+CppFlavor       = *
+__SystemLibrary = DLib
+
+
+*******************************************************************************
+*** PLACEMENT SUMMARY
+***
+
+"A1":  place at 0x08000000 { ro section .intvec };
+"P1":  place in [from 0x08000000 to 0x0800ffff] { ro };
+"P2":  place in [from 0x20000000 to 0x20001fff] { rw, block CSTACK, block HEAP };
+
+  Section            Kind        Address    Size  Object
+  -------            ----        -------    ----  ------
+"A1":                                       0xbc
+  .intvec            ro code  0x08000000    0xbc  startup_stm32f051x8.o [1]
+                            - 0x080000bc    0xbc
+
+"P1":                                     0x1c28
+  .text              ro code  0x080000bc   0x86c  stm32f0xx_hal_tim.o [1]
+  .text              ro code  0x08000928    0xda  main.o [1]
+  .text              ro code  0x08000a02    0x2a  zero_init3.o [4]
+  .text              ro code  0x08000a2c    0x50  stm32f0xx_hal_msp.o [1]
+  .text              ro code  0x08000a7c    0x58  stm32f0xx_hal.o [1]
+  .text              ro code  0x08000ad4   0x274  stm32f0xx_hal_tim_ex.o [1]
+  .text              ro code  0x08000d48   0x844  stm32f0xx_hal_rcc_ex.o [1]
+  .text              ro code  0x0800158c   0x100  stm32f0xx_hal_cortex.o [1]
+  .text              ro code  0x0800168c   0x36c  stm32f0xx_hal_gpio.o [1]
+  .text              ro code  0x080019f8    0x34  stm32f0xx_hal_rcc.o [1]
+  .text              ro code  0x08001a2c    0xae  I32DivModFast.o [4]
+  .text              ro code  0x08001ada     0x2  startup_stm32f051x8.o [1]
+  .text              ro code  0x08001adc     0x2  IntDivZer.o [4]
+  .text              ro code  0x08001ade     0x2  startup_stm32f051x8.o [1]
+  .rodata            const    0x08001ae0    0x68  stm32f0xx_hal_tim.o [1]
+  .text              ro code  0x08001b48    0x60  system_stm32f0xx.o [1]
+  .text              ro code  0x08001ba8    0x30  copy_init3.o [4]
+  .text              ro code  0x08001bd8    0x28  data_init.o [4]
+  .iar.init_table    const    0x08001c00    0x24  - Linker created -
+  .text              ro code  0x08001c24    0x1a  cmain.o [4]
+  .text              ro code  0x08001c3e     0x4  low_level_init.o [3]
+  .text              ro code  0x08001c42     0x8  exit.o [3]
+  .text              ro code  0x08001c4a     0x2  startup_stm32f051x8.o [1]
+  .text              ro code  0x08001c4c     0xa  cexit.o [4]
+  .text              ro code  0x08001c56     0x2  startup_stm32f051x8.o [1]
+  .text              ro code  0x08001c58    0x14  exit.o [5]
+  .text              ro code  0x08001c6c    0x10  startup_stm32f051x8.o [1]
+  .text              ro code  0x08001c7c     0xc  stm32f0xx_it.o [1]
+  .text              ro code  0x08001c88     0xc  cstartup_M.o [4]
+  .text              ro code  0x08001c94     0x2  startup_stm32f051x8.o [1]
+  .text              ro code  0x08001c96     0x2  startup_stm32f051x8.o [1]
+  .text              ro code  0x08001c98     0x2  startup_stm32f051x8.o [1]
+  .text              ro code  0x08001c9a     0x2  startup_stm32f051x8.o [1]
+  .text              ro code  0x08001c9c     0x2  startup_stm32f051x8.o [1]
+  .text              ro code  0x08001c9e     0x2  startup_stm32f051x8.o [1]
+  .text              ro code  0x08001ca0     0x2  startup_stm32f051x8.o [1]
+  .text              ro code  0x08001ca2     0x2  startup_stm32f051x8.o [1]
+  .text              ro code  0x08001ca4     0x2  startup_stm32f051x8.o [1]
+  .text              ro code  0x08001ca6     0x2  startup_stm32f051x8.o [1]
+  .text              ro code  0x08001ca8     0x2  startup_stm32f051x8.o [1]
+  .text              ro code  0x08001caa     0x2  startup_stm32f051x8.o [1]
+  .text              ro code  0x08001cac     0x2  startup_stm32f051x8.o [1]
+  .text              ro code  0x08001cae     0x2  startup_stm32f051x8.o [1]
+  .text              ro code  0x08001cb0     0x2  startup_stm32f051x8.o [1]
+  .text              ro code  0x08001cb2     0x2  startup_stm32f051x8.o [1]
+  .text              ro code  0x08001cb4     0x2  startup_stm32f051x8.o [1]
+  .text              ro code  0x08001cb6     0x2  startup_stm32f051x8.o [1]
+  .text              ro code  0x08001cb8     0x2  startup_stm32f051x8.o [1]
+  .text              ro code  0x08001cba     0x2  startup_stm32f051x8.o [1]
+  .text              ro code  0x08001cbc     0x2  startup_stm32f051x8.o [1]
+  .text              ro code  0x08001cbe     0x2  startup_stm32f051x8.o [1]
+  .text              ro code  0x08001cc0     0x2  startup_stm32f051x8.o [1]
+  .text              ro code  0x08001cc2     0x2  startup_stm32f051x8.o [1]
+  .text              ro code  0x08001cc4     0x2  startup_stm32f051x8.o [1]
+  .text              ro code  0x08001cc6     0x2  startup_stm32f051x8.o [1]
+  .text              ro code  0x08001cc8     0x2  startup_stm32f051x8.o [1]
+  .text              ro code  0x08001cca     0x2  startup_stm32f051x8.o [1]
+  .text              ro code  0x08001ccc     0x2  startup_stm32f051x8.o [1]
+  .rodata            const    0x08001cce     0x0  zero_init3.o [4]
+  .rodata            const    0x08001cce     0x0  copy_init3.o [4]
+  Initializer bytes  ro data  0x08001cd0    0x14  <for P2 s0>
+                            - 0x08001ce4  0x1c28
+
+"P2", part 1 of 3:                          0x14
+  P2 s0                       0x20000000    0x14  <Init block>
+    .data            inited   0x20000000    0x14  system_stm32f0xx.o [1]
+                            - 0x20000014    0x14
+
+"P2", part 2 of 3:                          0x44
+  .bss               zero     0x20000014    0x3c  main.o [1]
+  .bss               zero     0x20000050     0x4  stm32f0xx_hal.o [1]
+                            - 0x20000054    0x40
+
+"P2", part 3 of 3:                         0x800
+  CSTACK                      0x20000058   0x800  <Block>
+    CSTACK           uninit   0x20000058   0x800  <Block tail>
+                            - 0x20000858   0x800
+
+
+*******************************************************************************
+*** INIT TABLE
+***
+
+          Address     Size
+          -------     ----
+Zero (__iar_zero_init3)
+    1 destination range, total size 0x40:
+          0x20000014  0x40
+
+Copy (__iar_copy_init3)
+    1 source range, total size 0x14:
+          0x08001cd0  0x14
+    1 destination range, total size 0x14:
+          0x20000000  0x14
+
+
+
+*******************************************************************************
+*** MODULE SUMMARY
+***
+
+    Module                  ro code  ro data  rw data
+    ------                  -------  -------  -------
+F:\workspaces\Two_Boards_PWM_IO\TIM_F0_PWM_Output\Projects\EWARM\TIM_F0_PWM_Output Configuration\Obj: [1]
+    main.o                      218                60
+    startup_stm32f051x8.o       270
+    stm32f0xx_hal.o              88                 4
+    stm32f0xx_hal_cortex.o      256
+    stm32f0xx_hal_gpio.o        876
+    stm32f0xx_hal_msp.o          80
+    stm32f0xx_hal_rcc.o          52
+    stm32f0xx_hal_rcc_ex.o    2 116
+    stm32f0xx_hal_tim.o       2 156      104
+    stm32f0xx_hal_tim_ex.o      628
+    stm32f0xx_it.o               12
+    system_stm32f0xx.o           96       20       20
+    -------------------------------------------------
+    Total:                    6 848      124       84
+
+command line: [2]
+    -------------------------------------------------
+    Total:
+
+dl6M_tln.a: [3]
+    exit.o                        8
+    low_level_init.o              4
+    -------------------------------------------------
+    Total:                       12
+
+rt6M_tl.a: [4]
+    I32DivModFast.o             174
+    IntDivZer.o                   2
+    cexit.o                      10
+    cmain.o                      26
+    copy_init3.o                 48
+    cstartup_M.o                 12
+    data_init.o                  40
+    zero_init3.o                 42
+    -------------------------------------------------
+    Total:                      354
+
+shb_l.a: [5]
+    exit.o                       20
+    -------------------------------------------------
+    Total:                       20
+
+    Linker created                        38    2 048
+-----------------------------------------------------
+    Grand Total:              7 234      162    2 132
+
+
+*******************************************************************************
+*** ENTRY LIST
+***
+
+Entry                      Address   Size  Type      Object
+-----                      -------   ----  ----      ------
+?main                   0x08001c25         Code  Gb  cmain.o [4]
+AHBPrescTable           0x20000000   0x10  Data  Gb  system_stm32f0xx.o [1]
+APBAHBPrescTable        0x08001a1c   0x10  Data  Gb  stm32f0xx_hal_rcc.o [1]
+CSTACK$$Base            0x20000058          --   Gb  - Linker created -
+CSTACK$$Limit           0x20000858          --   Gb  - Linker created -
+HAL_GPIO_Init           0x0800168d  0x2c6  Code  Gb  stm32f0xx_hal_gpio.o [1]
+HAL_GetTick             0x08000ac5    0x6  Code  Wk  stm32f0xx_hal.o [1]
+HAL_IncTick             0x08000abb    0xa  Code  Wk  stm32f0xx_hal.o [1]
+HAL_Init                0x08000a7d   0x1a  Code  Gb  stm32f0xx_hal.o [1]
+HAL_InitTick            0x08000a97   0x24  Code  Wk  stm32f0xx_hal.o [1]
+HAL_MspInit             0x08000a2d   0x10  Code  Gb  stm32f0xx_hal_msp.o [1]
+HAL_NVIC_SetPriority    0x080015c5   0x1c  Code  Gb  stm32f0xx_hal_cortex.o [1]
+HAL_RCC_ClockConfig     0x08001215  0x27c  Code  Gb  stm32f0xx_hal_rcc_ex.o [1]
+HAL_RCC_GetHCLKFreq     0x080019f9   0x1c  Code  Gb  stm32f0xx_hal_rcc.o [1]
+HAL_RCC_GetSysClockFreq
+                        0x080014a5   0x38  Code  Gb  stm32f0xx_hal_rcc_ex.o [1]
+HAL_RCC_OscConfig       0x08000d49  0x4b4  Code  Gb  stm32f0xx_hal_rcc_ex.o [1]
+HAL_SYSTICK_Callback    0x0800161d    0x2  Code  Wk  stm32f0xx_hal_cortex.o [1]
+HAL_SYSTICK_Config      0x080015e1   0x28  Code  Gb  stm32f0xx_hal_cortex.o [1]
+HAL_SYSTICK_IRQHandler  0x08001615    0x8  Code  Gb  stm32f0xx_hal_cortex.o [1]
+HAL_TIMEx_ConfigBreakDeadTime
+                        0x08000b99   0xf6  Code  Gb  stm32f0xx_hal_tim_ex.o [1]
+HAL_TIMEx_MasterConfigSynchronization
+                        0x08000ad5   0xb2  Code  Gb  stm32f0xx_hal_tim_ex.o [1]
+HAL_TIM_PWM_ConfigChannel
+                        0x08000251  0x204  Code  Gb  stm32f0xx_hal_tim.o [1]
+HAL_TIM_PWM_Init        0x08000119   0x94  Code  Gb  stm32f0xx_hal_tim.o [1]
+HAL_TIM_PWM_MspInit     0x08000a3d   0x38  Code  Gb  stm32f0xx_hal_msp.o [1]
+HAL_TIM_PWM_Start       0x080001c5   0x5c  Code  Gb  stm32f0xx_hal_tim.o [1]
+NVIC_SetPriority        0x0800158d   0x36  Code  Lc  stm32f0xx_hal_cortex.o [1]
+PLLMULFactorTable       0x0800156c   0x10  Data  Gb  stm32f0xx_hal_rcc_ex.o [1]
+PredivFactorTable       0x0800157c   0x10  Data  Gb  stm32f0xx_hal_rcc_ex.o [1]
+Region$$Table$$Base     0x08001c00          --   Gb  - Linker created -
+Region$$Table$$Limit    0x08001c24          --   Gb  - Linker created -
+SysTick_Handler         0x08001c7d    0xc  Code  Gb  stm32f0xx_it.o [1]
+SystemClock_Config      0x080009b1   0x3e  Code  Gb  main.o [1]
+SystemCoreClock         0x20000010    0x4  Data  Gb  system_stm32f0xx.o [1]
+SystemInit              0x08001b49   0x48  Code  Gb  system_stm32f0xx.o [1]
+TIM_Base_SetConfig      0x08000475   0x74  Code  Gb  stm32f0xx_hal_tim.o [1]
+TIM_CCxChannelCmd       0x0800087d   0x70  Code  Gb  stm32f0xx_hal_tim.o [1]
+TIM_OC1_SetConfig       0x080004f5   0xba  Code  Lc  stm32f0xx_hal_tim.o [1]
+TIM_OC2_SetConfig       0x080005bd   0xda  Code  Gb  stm32f0xx_hal_tim.o [1]
+TIM_OC3_SetConfig       0x080006c9   0xd6  Code  Lc  stm32f0xx_hal_tim.o [1]
+TIM_OC4_SetConfig       0x080007b5   0x74  Code  Lc  stm32f0xx_hal_tim.o [1]
+__ICFEDIT_region_RAM_end__ {Abs}
+                        0x20001fff          --   Gb  command line/config [2]
+__ICFEDIT_region_RAM_start__ {Abs}
+                        0x20000000          --   Gb  command line/config [2]
+__aeabi_idiv0           0x08001add         Code  Gb  IntDivZer.o [4]
+__aeabi_uidiv           0x08001a2d         Code  Gb  I32DivModFast.o [4]
+__aeabi_uidivmod        0x08001a2d         Code  Gb  I32DivModFast.o [4]
+__cmain                 0x08001c25         Code  Gb  cmain.o [4]
+__exit                  0x08001c59   0x14  Code  Gb  exit.o [5]
+__iar_copy_init3        0x08001ba9   0x30  Code  Gb  copy_init3.o [4]
+__iar_data_init3        0x08001bd9   0x28  Code  Gb  data_init.o [4]
+__iar_program_start     0x08001c89         Code  Gb  cstartup_M.o [4]
+__iar_zero_init3        0x08000a03   0x2a  Code  Gb  zero_init3.o [4]
+__low_level_init        0x08001c3f    0x4  Code  Gb  low_level_init.o [3]
+__vector_table          0x08000000         Data  Gb  startup_stm32f051x8.o [1]
+_call_main              0x08001c31         Code  Gb  cmain.o [4]
+_exit                   0x08001c4d         Code  Gb  cexit.o [4]
+_main                   0x08001c3b         Code  Gb  cmain.o [4]
+assert_failed           0x08000a01    0x2  Code  Gb  main.o [1]
+exit                    0x08001c43    0x8  Code  Gb  exit.o [3]
+htim1                   0x20000014   0x3c  Data  Gb  main.o [1]
+main                    0x08000929   0x88  Code  Gb  main.o [1]
+uwTick                  0x20000050    0x4  Data  Lc  stm32f0xx_hal.o [1]
+
+
+[1] = F:\workspaces\Two_Boards_PWM_IO\TIM_F0_PWM_Output\Projects\EWARM\TIM_F0_PWM_Output Configuration\Obj
+[2] = command line
+[3] = dl6M_tln.a
+[4] = rt6M_tl.a
+[5] = shb_l.a
+
+  7 234 bytes of readonly  code memory
+    162 bytes of readonly  data memory
+  2 132 bytes of readwrite data memory
+
+Errors: none
+Warnings: none
