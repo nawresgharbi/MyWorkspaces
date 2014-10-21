@@ -44,11 +44,8 @@
 UART_HandleTypeDef huart1;
 
 /* USER CODE BEGIN PV */
-//uint8_t transmition[1] = "";
-uint8_t reception[1] =""; //"0123456789";//00000000000000000000";
-uint8_t reception2[1] ="";
-uint8_t returnch[] = "\r\n";
-//uint32_t reception_state;
+
+uint8_t reception[1] =""; 
 
 /* USER CODE END PV */
 
@@ -95,25 +92,12 @@ int main(void)
   /* USER CODE END 2 */
   
   /* USER CODE BEGIN 3 */ 
-  HAL_UART_Receive_IT(&huart1, (uint8_t *)reception, 1/*BufferSize(reception)*/);
+  HAL_UART_Receive_IT(&huart1, (uint8_t *)reception, 1/*BufferSize(reception) = 1*/);
+  
   /* Infinite loop */
   while (1)
   {
 
-//      if ((HAL_UART_Receive(&huart1, (uint8_t *)reception, BufferSize(reception),0xFFFF))== HAL_OK)
-//      {
-//        HAL_UART_Transmit_IT(&huart1, (uint8_t*)reception, BufferSize(reception));
-        
-        
-        
-        
-        //reception2*[BufferSize(reception2)] =  reception*[1];
-        //reception2*[BufferSize(reception2)]= reception2*[BufferSize(reception2)]+reception*[1];
-        //sprintf(reception2,"%s",reception);
-        //while (HAL_UART_GetState(&huart1)==HAL_UART_STATE_READY);
-        
-        
-//      }
 
     /* USER CODE END 3 */
     

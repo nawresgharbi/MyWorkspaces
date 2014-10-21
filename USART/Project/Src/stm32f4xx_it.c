@@ -36,7 +36,8 @@
 #include "stm32f4xx.h"
 #include "stm32f4xx_it.h"
 /* USER CODE BEGIN 0 */
-
+uint8_t returnch[] = "\r\n";
+#define BufferSize(_BUFFER_) sizeof(_BUFFER_)/sizeof(*(_BUFFER_))
 /* USER CODE END 0 */
 /* External variables --------------------------------------------------------*/
 
@@ -71,6 +72,7 @@ void USART1_IRQHandler(void)
   /* USER CODE END USART1_IRQn 0 */
   HAL_NVIC_ClearPendingIRQ(USART1_IRQn);
   HAL_UART_IRQHandler(&huart1);
+  //HAL_UART_Transmit_IT(&huart1, (uint8_t*)returnch, BufferSize(returnch));
   /* USER CODE BEGIN USART1_IRQn 1 */
 
   /* USER CODE END USART1_IRQn 1 */

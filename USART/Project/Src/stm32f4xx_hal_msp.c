@@ -75,14 +75,21 @@ void HAL_UART_MspInit(UART_HandleTypeDef* huart)
     PA10     ------> USART1_RX
     PA9     ------> USART1_TX 
     */
-    GPIO_InitStruct.Pin = GPIO_PIN_10|GPIO_PIN_9;
+    GPIO_InitStruct.Pin = GPIO_PIN_9;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_PULLUP;
     GPIO_InitStruct.Speed = GPIO_SPEED_LOW;
     GPIO_InitStruct.Alternate = GPIO_AF7_USART1;
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
-    HAL_NVIC_SetPriority(USART1_IRQn, 0, 0);
+    
+    GPIO_InitStruct.Pin = GPIO_PIN_10;
+    GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+    GPIO_InitStruct.Pull = GPIO_PULLUP;
+    GPIO_InitStruct.Speed = GPIO_SPEED_LOW;
+    GPIO_InitStruct.Alternate = GPIO_AF7_USART1;
+    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+    
+    HAL_NVIC_SetPriority(USART1_IRQn, 1, 0);
     HAL_NVIC_EnableIRQ(USART1_IRQn);
   /* USER CODE BEGIN USART1_MspInit 1 */
 
