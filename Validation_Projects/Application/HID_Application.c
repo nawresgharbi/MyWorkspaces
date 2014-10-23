@@ -15,9 +15,24 @@
 #include "HID_Application.h"
 #include "usb_device.h" 
 #include "usbd_hid.h" 
+#include "usbd_conf.h" 
+
+
 /* Private typedef -----------------------------------------------------------*/
+#define USE_USB_FS
+/* import handles for USB FS */
+#ifdef USE_USB_FS
 extern PCD_HandleTypeDef hpcd_USB_OTG_FS;
 extern USBD_HandleTypeDef hUsbDeviceFS;
+#endif
+
+/* import handles for USB HS and FS in HS */
+#ifdef USE_USB_HS 
+extern PCD_HandleTypeDef hpcd_USB_OTG_HS;
+extern USBD_HandleTypeDef hUsbDeviceHS;
+#endif
+
+
 /* Private define ------------------------------------------------------------*/
 #define CURSOR_STEP     1
 uint32_t HID_Transfert = 0;
@@ -103,7 +118,13 @@ void HAL_SYSTICK_Callback(void)
     /* send data though IN endpoint*/
     if((HID_Buffer[1] != 0) || (HID_Buffer[2] != 0))
     {
+      #ifdef USE_USB_FS
       USBD_HID_SendReport(&hUsbDeviceFS, HID_Buffer, 4);
+      #endif
+      
+      #ifdef USE_USB_HS
+      USBD_HID_SendReport(&hUsbDeviceHS, HID_Buffer, 4);
+      #endif
     }    
     counter =0;
   }
