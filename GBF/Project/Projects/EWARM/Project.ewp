@@ -43,7 +43,7 @@
         </option>
         <option>
           <name>Input description</name>
-          <state></state>
+          <state>Full formatting.</state>
         </option>
         <option>
           <name>Output variant</name>
@@ -52,7 +52,7 @@
         </option>
         <option>
           <name>Output description</name>
-          <state></state>
+          <state>Full formatting.</state>
         </option>
         <option>
           <name>GOutputBinary</name>
@@ -235,7 +235,7 @@
         <option>
           <name>CCAllowList</name>
           <version>1</version>
-          <state>11111110</state>
+          <state>00000000</state>
         </option>
         <option>
           <name>CCDebugInfo</name>
@@ -327,7 +327,7 @@
         </option>
         <option>
           <name>CCOptLevel</name>
-          <state>3</state>
+          <state>0</state>
         </option>
         <option>
           <name>CCOptStrategy</name>
@@ -336,7 +336,7 @@
         </option>
         <option>
           <name>CCOptLevelSlave</name>
-          <state>3</state>
+          <state>0</state>
         </option>
         <option>
           <name>CompilerMisraRules98</name>
@@ -713,11 +713,11 @@
         </option>
         <option>
           <name>IlinkIcfOverride</name>
-          <state>0</state>
+          <state>1</state>
         </option>
         <option>
           <name>IlinkIcfFile</name>
-          <state>$TOOLKIT_DIR$\config\linker\ST\stm32f429xI.icf</state>
+          <state>$TOOLKIT_DIR$\config\linker\ST\stm32f407xG.icf</state>
         </option>
         <option>
           <name>IlinkIcfFileSlave</name>
@@ -987,7 +987,16 @@
         <name>$PROJ_DIR$\..\..\Drivers\BSP\STM324x9I_EVAL\stm324x9i_eval_io.c</name>
       </file>
       <file>
+        <name>$PROJ_DIR$\..\..\Drivers\BSP\STM324x9I_EVAL\stm324x9i_eval_lcd.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\Drivers\BSP\STM324x9I_EVAL\stm324x9i_eval_sdram.c</name>
+      </file>
+      <file>
         <name>$PROJ_DIR$\..\..\Drivers\BSP\Components\stmpe1600\stmpe1600.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\Drivers\BSP\Components\stmpe811\stmpe811.c</name>
       </file>
     </group>
     <group>
@@ -1000,6 +1009,9 @@
       </file>
       <file>
         <name>$PROJ_DIR$\..\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_dma.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_dma2d.c</name>
       </file>
       <file>
         <name>$PROJ_DIR$\..\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_dma_ex.c</name>
@@ -1021,6 +1033,9 @@
       </file>
       <file>
         <name>$PROJ_DIR$\..\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_i2c_ex.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_ltdc.c</name>
       </file>
       <file>
         <name>$PROJ_DIR$\..\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_pwr.c</name>

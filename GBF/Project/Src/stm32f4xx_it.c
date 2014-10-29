@@ -37,6 +37,8 @@
 #include "stm32f4xx_it.h"
 /* USER CODE BEGIN 0 */
 extern void GetFrequency(void);
+int counter_start = 0;
+extern TIM_HandleTypeDef htim1;
 /* USER CODE END 0 */
 /* External variables --------------------------------------------------------*/
 
@@ -60,6 +62,18 @@ void SysTick_Handler(void)
 }
 
 /* USER CODE BEGIN 1 */
-
+void EXTI15_10_IRQHandler (void)
+{
+  if (counter_start == 0)
+  {
+    HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
+    counter_start++;
+  }
+  else
+  {
+    HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_1);
+    counter_start--;
+  }
+}
 /* USER CODE END 1 */
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

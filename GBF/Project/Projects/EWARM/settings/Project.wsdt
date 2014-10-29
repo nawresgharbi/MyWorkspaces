@@ -2,50 +2,42 @@
 
 <Workspace>
   <ConfigDictionary>
-    <CurrentConfigs>
-      <Project>Project/Project Configuration</Project>
-    </CurrentConfigs>
-  </ConfigDictionary>
+    
+  <CurrentConfigs><Project>Project/Project Configuration</Project></CurrentConfigs></ConfigDictionary>
   <Desktop>
     <Static>
       <Workspace>
         <ColumnWidths>
-          <Column0>346</Column0>
-          <Column1>27</Column1>
-          <Column2>27</Column2>
-          <Column3>27</Column3>
-        </ColumnWidths>
+          
+          
+          
+          
+        <Column0>329</Column0><Column1>27</Column1><Column2>27</Column2><Column3>27</Column3></ColumnWidths>
       </Workspace>
       <Build>
-        <ColumnWidth0>20</ColumnWidth0>
-        <ColumnWidth1>1395</ColumnWidth1>
-        <ColumnWidth2>372</ColumnWidth2>
-        <ColumnWidth3>93</ColumnWidth3>
-      </Build>
+        
+        
+        
+        
+      <ColumnWidth0>20</ColumnWidth0><ColumnWidth1>1395</ColumnWidth1><ColumnWidth2>372</ColumnWidth2><ColumnWidth3>93</ColumnWidth3></Build>
       <TerminalIO/>
-    </Static>
+    <Find-in-Files><ColumnWidth0>569</ColumnWidth0><ColumnWidth1>94</ColumnWidth1><ColumnWidth2>854</ColumnWidth2><ColumnWidth3>379</ColumnWidth3></Find-in-Files><Debug-Log><ColumnWidth0>20</ColumnWidth0><ColumnWidth1>1861</ColumnWidth1></Debug-Log></Static>
     <Windows>
-      <Wnd1>
+      
+      
+    <Wnd1>
         <Tabs>
           <Tab>
             <Identity>TabID-512-32318</Identity>
             <TabName>Workspace</TabName>
             <Factory>Workspace</Factory>
             <Session>
-              <NodeDict>
-                <ExpandedNode>Project</ExpandedNode>
-                <ExpandedNode>Project/Application</ExpandedNode>
-                <ExpandedNode>Project/Application/User</ExpandedNode>
-                <ExpandedNode>Project/Drivers</ExpandedNode>
-                <ExpandedNode>Project/Drivers/GBF</ExpandedNode>
-                <ExpandedNode>Project/Drivers/STM32F4xx_HAL_Driver</ExpandedNode>
-              </NodeDict>
-            </Session>
+              
+            <NodeDict><ExpandedNode>Project</ExpandedNode><ExpandedNode>Project/Application</ExpandedNode><ExpandedNode>Project/Application/EWARM</ExpandedNode><ExpandedNode>Project/Application/User</ExpandedNode><ExpandedNode>Project/Drivers</ExpandedNode><ExpandedNode>Project/Drivers/CMSIS</ExpandedNode><ExpandedNode>Project/Drivers/GBF</ExpandedNode><ExpandedNode>Project/Drivers/STM32F4xx_HAL_Driver</ExpandedNode></NodeDict></Session>
           </Tab>
         </Tabs>
-        <SelectedTab>0</SelectedTab>
-      </Wnd1>
-      <Wnd2>
+        
+      <SelectedTab>0</SelectedTab></Wnd1><Wnd4>
         <Tabs>
           <Tab>
             <Identity>TabID-21445-999</Identity>
@@ -53,221 +45,22 @@
             <Factory>Build</Factory>
             <Session/>
           </Tab>
-        </Tabs>
-        <SelectedTab>0</SelectedTab>
-      </Wnd2>
-    </Windows>
+        <Tab><Identity>TabID-12332-26961</Identity><TabName>Find in Files</TabName><Factory>Find-in-Files</Factory><Session/></Tab><Tab><Identity>TabID-23959-32679</Identity><TabName>Debug Log</TabName><Factory>Debug-Log</Factory><Session/></Tab></Tabs>
+        
+      <SelectedTab>0</SelectedTab></Wnd4></Windows>
     <Editor>
-      <Pane>
-        <Tab>
-          <Factory>TextEditor</Factory>
-          <Filename>$WS_DIR$\..\..\Inc\stm32f4xx_hal_conf.h</Filename>
-          <XPos>0</XPos>
-          <YPos>0</YPos>
-          <SelStart>0</SelStart>
-          <SelEnd>0</SelEnd>
-          <XPos2>0</XPos2>
-          <YPos2>48</YPos2>
-          <SelStart2>3015</SelStart2>
-          <SelEnd2>3015</SelEnd2>
-        </Tab>
-        <Tab>
-          <Factory>TextEditor</Factory>
-          <Filename>$WS_DIR$\..\..\Drivers\BSP\STM324x9I_EVAL\stm324x9i_eval.c</Filename>
-          <XPos>0</XPos>
-          <YPos>0</YPos>
-          <SelStart>0</SelStart>
-          <SelEnd>0</SelEnd>
-          <XPos2>0</XPos2>
-          <YPos2>365</YPos2>
-          <SelStart2>13821</SelStart2>
-          <SelEnd2>13833</SelEnd2>
-        </Tab>
-        <Tab>
-          <Factory>TextEditor</Factory>
-          <Filename>$WS_DIR$\..\..\Drivers\BSP\STM324x9I_EVAL\stm324x9i_eval_sdram.h</Filename>
-          <XPos>0</XPos>
-          <YPos>0</YPos>
-          <SelStart>0</SelStart>
-          <SelEnd>0</SelEnd>
-          <XPos2>0</XPos2>
-          <YPos2>111</YPos2>
-          <SelStart2>5450</SelStart2>
-          <SelEnd2>5450</SelEnd2>
-        </Tab>
-        <Tab>
-          <Factory>TextEditor</Factory>
-          <Filename>$WS_DIR$\..\..\Drivers\BSP\STM324x9I_EVAL\stm324x9i_eval_lcd.h</Filename>
-          <XPos>0</XPos>
-          <YPos>0</YPos>
-          <SelStart>0</SelStart>
-          <SelEnd>0</SelEnd>
-          <XPos2>0</XPos2>
-          <YPos2>39</YPos2>
-          <SelStart2>2574</SelStart2>
-          <SelEnd2>2574</SelEnd2>
-        </Tab>
-        <Tab>
-          <Factory>TextEditor</Factory>
-          <Filename>$WS_DIR$\..\..\Drivers\BSP\STM324x9I_EVAL\stm324x9i_eval_io.c</Filename>
-          <XPos>0</XPos>
-          <YPos>0</YPos>
-          <SelStart>0</SelStart>
-          <SelEnd>0</SelEnd>
-          <XPos2>0</XPos2>
-          <YPos2>99</YPos2>
-          <SelStart2>4571</SelStart2>
-          <SelEnd2>4571</SelEnd2>
-        </Tab>
-        <Tab>
-          <Factory>TextEditor</Factory>
-          <Filename>$WS_DIR$\..\..\Src\main.c</Filename>
-          <XPos>0</XPos>
-          <YPos>0</YPos>
-          <SelStart>0</SelStart>
-          <SelEnd>0</SelEnd>
-          <XPos2>0</XPos2>
-          <YPos2>69</YPos2>
-          <SelStart2>3309</SelStart2>
-          <SelEnd2>3309</SelEnd2>
-        </Tab>
-        <Tab>
-          <Factory>TextEditor</Factory>
-          <Filename>$WS_DIR$\..\..\Drivers\BSP\STM324x9I_EVAL\stm324x9i_eval.h</Filename>
-          <XPos>0</XPos>
-          <YPos>0</YPos>
-          <SelStart>0</SelStart>
-          <SelEnd>0</SelEnd>
-          <XPos2>0</XPos2>
-          <YPos2>224</YPos2>
-          <SelStart2>8975</SelStart2>
-          <SelEnd2>8975</SelEnd2>
-        </Tab>
-        <Tab>
-          <Factory>TextEditor</Factory>
-          <Filename>$WS_DIR$\..\..\Src\stm32f4xx_it.c</Filename>
-          <XPos>0</XPos>
-          <YPos>0</YPos>
-          <SelStart>0</SelStart>
-          <SelEnd>0</SelEnd>
-          <XPos2>0</XPos2>
-          <YPos2>22</YPos2>
-          <SelStart2>2743</SelStart2>
-          <SelEnd2>2743</SelEnd2>
-        </Tab>
-        <Tab>
-          <Factory>TextEditor</Factory>
-          <Filename>$WS_DIR$\..\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim.c</Filename>
-          <XPos>0</XPos>
-          <YPos>0</YPos>
-          <SelStart>0</SelStart>
-          <SelEnd>0</SelEnd>
-          <XPos2>0</XPos2>
-          <YPos2>3068</YPos2>
-          <SelStart2>102703</SelStart2>
-          <SelEnd2>102703</SelEnd2>
-        </Tab>
-        <Tab>
-          <Factory>TextEditor</Factory>
-          <Filename>$WS_DIR$\..\..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h</Filename>
-          <XPos>0</XPos>
-          <YPos>0</YPos>
-          <SelStart>0</SelStart>
-          <SelEnd>0</SelEnd>
-          <XPos2>0</XPos2>
-          <YPos2>1348</YPos2>
-          <SelStart2>64888</SelStart2>
-          <SelEnd2>64949</SelEnd2>
-        </Tab>
-        <Tab>
-          <Factory>TextEditor</Factory>
-          <Filename>$WS_DIR$\..\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_i2c.c</Filename>
-          <XPos>0</XPos>
-          <YPos>0</YPos>
-          <SelStart>0</SelStart>
-          <SelEnd>0</SelEnd>
-          <XPos2>0</XPos2>
-          <YPos2>3554</YPos2>
-          <SelStart2>104676</SelStart2>
-          <SelEnd2>104676</SelEnd2>
-        </Tab>
-        <ActiveTab>10</ActiveTab>
-      </Pane>
-      <ActivePane>0</ActivePane>
-      <Sizes>
-        <Pane>
-          <X>1000000</X>
-          <Y>1000000</Y>
-        </Pane>
-      </Sizes>
-      <SplitMode>1</SplitMode>
-    </Editor>
+      
+      
+      
+      
+    <Pane><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\..\Src\main.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>260</YPos2><SelStart2>8061</SelStart2><SelEnd2>8061</SelEnd2></Tab><ActiveTab>0</ActiveTab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\..\Inc\stm32f4xx_hal_conf.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>42</YPos2><SelStart2>3158</SelStart2><SelEnd2>3158</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\..\Drivers\BSP\STM324x9I_EVAL\stm324x9i_eval_lcd.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>138</YPos2><SelStart2>6214</SelStart2><SelEnd2>6214</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\..\Drivers\BSP\STM324x9I_EVAL\stm324x9i_eval_lcd.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>167</YPos2><SelStart2>6594</SelStart2><SelEnd2>6633</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\..\Src\stm32f4xx_it.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>42</YPos2><SelStart2>3156</SelStart2><SelEnd2>3156</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\..\Drivers\BSP\STM324x9I_EVAL\stm324x9i_eval.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>54</YPos2><SelStart2>2921</SelStart2><SelEnd2>2921</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\..\Drivers\BSP\STM324x9I_EVAL\stm324x9i_eval.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>171</YPos2><SelStart2>2928</SelStart2><SelEnd2>2944</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templates\iar\startup_stm32f429xx.s</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>99</YPos2><SelStart2>7189</SelStart2><SelEnd2>7209</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>4325</YPos2><SelStart2>145815</SelStart2><SelEnd2>145815</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>1445</YPos2><SelStart2>70347</SelStart2><SelEnd2>70348</SelEnd2></Tab></Pane><ActivePane>0</ActivePane><Sizes><Pane><X>1000000</X><Y>1000000</Y></Pane></Sizes><SplitMode>1</SplitMode></Editor>
     <Positions>
-      <Top>
-        <Row0>
-          <Sizes>
-            <Toolbar-009A69B8>
-              <key>iaridepm.enu1</key>
-            </Toolbar-009A69B8>
-          </Sizes>
-        </Row0>
-        <Row1>
-          <Sizes/>
-        </Row1>
-      </Top>
-      <Left>
-        <Row0>
-          <Sizes>
-            <Wnd1>
-              <Rect>
-                <Top>-2</Top>
-                <Left>-2</Left>
-                <Bottom>755</Bottom>
-                <Right>420</Right>
-                <x>-2</x>
-                <y>-2</y>
-                <xscreen>200</xscreen>
-                <yscreen>200</yscreen>
-                <sizeHorzCX>104167</sizeHorzCX>
-                <sizeHorzCY>200401</sizeHorzCY>
-                <sizeVertCX>219792</sizeVertCX>
-                <sizeVertCY>758517</sizeVertCY>
-              </Rect>
-            </Wnd1>
-          </Sizes>
-        </Row0>
-      </Left>
-      <Right>
-        <Row0>
-          <Sizes/>
-        </Row0>
-      </Right>
-      <Bottom>
-        <Row0>
-          <Sizes>
-            <Wnd2>
-              <Rect>
-                <Top>-2</Top>
-                <Left>-2</Left>
-                <Bottom>198</Bottom>
-                <Right>1922</Right>
-                <x>-2</x>
-                <y>-2</y>
-                <xscreen>1924</xscreen>
-                <yscreen>200</yscreen>
-                <sizeHorzCX>1002083</sizeHorzCX>
-                <sizeHorzCY>200401</sizeHorzCY>
-                <sizeVertCX>104167</sizeVertCX>
-                <sizeVertCY>200401</sizeVertCY>
-              </Rect>
-            </Wnd2>
-          </Sizes>
-        </Row0>
-      </Bottom>
-      <Float>
-        <Sizes/>
-      </Float>
-    </Positions>
+      
+      
+      
+      
+      
+    <Top><Row0><Sizes><Toolbar-03DA7008><key>iaridepm.enu1</key></Toolbar-03DA7008></Sizes></Row0></Top><Left><Row0><Sizes><Wnd1><Rect><Top>-2</Top><Left>-2</Left><Bottom>752</Bottom><Right>420</Right><x>-2</x><y>-2</y><xscreen>200</xscreen><yscreen>199</yscreen><sizeHorzCX>104167</sizeHorzCX><sizeHorzCY>200201</sizeHorzCY><sizeVertCX>219792</sizeVertCX><sizeVertCY>758551</sizeVertCY></Rect></Wnd1></Sizes></Row0></Left><Right><Row0><Sizes/></Row0></Right><Bottom><Row0><Sizes><Wnd4><Rect><Top>-2</Top><Left>-2</Left><Bottom>197</Bottom><Right>1922</Right><x>-2</x><y>-2</y><xscreen>1924</xscreen><yscreen>199</yscreen><sizeHorzCX>1002083</sizeHorzCX><sizeHorzCY>200201</sizeHorzCY><sizeVertCX>104167</sizeVertCX><sizeVertCY>200201</sizeVertCY></Rect></Wnd4></Sizes></Row0></Bottom><Float><Sizes/></Float></Positions>
   </Desktop>
 </Workspace>
 
