@@ -53,6 +53,10 @@ void HAL_MspInit(void)
   /* System interrupt init*/
 /* SysTick_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(SysTick_IRQn, 0, 0);
+//  HAL_NVIC_SetPriority(EXTI9_5_IRQn, 4, 0);
+//  HAL_NVIC_SetPriority(EXTI15_10_IRQn, 4, 0);
+  
+    
 
   /* USER CODE BEGIN MspInit 1 */
 
@@ -74,12 +78,12 @@ void HAL_TIM_PWM_MspInit(TIM_HandleTypeDef* htim_pwm)
     /**TIM1 GPIO Configuration    
     PE9     ------> TIM1_CH1 
     */
-    GPIO_InitStruct.Pin = GPIO_PIN_9;
+    GPIO_InitStruct.Pin = GPIO_PIN_8;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
     GPIO_InitStruct.Alternate = GPIO_AF1_TIM1;
-    HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
+    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /* USER CODE BEGIN TIM1_MspInit 1 */
 

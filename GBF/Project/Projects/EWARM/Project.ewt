@@ -118,6 +118,9 @@
     <group>
       <name>GBF</name>
       <file>
+        <name>$PROJ_DIR$\..\..\Utilities\Log\lcd_log.c</name>
+      </file>
+      <file>
         <name>$PROJ_DIR$\..\..\Drivers\BSP\STM324x9I_EVAL\stm324x9i_eval.c</name>
       </file>
       <file>

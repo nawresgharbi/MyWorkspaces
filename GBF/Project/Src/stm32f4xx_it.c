@@ -36,6 +36,7 @@
 #include "stm32f4xx.h"
 #include "stm32f4xx_it.h"
 /* USER CODE BEGIN 0 */
+#include "stm324x9i_eval_io.h"
 extern void GetFrequency(void);
 int counter_start = 0;
 extern TIM_HandleTypeDef htim1;
@@ -57,23 +58,38 @@ void SysTick_Handler(void)
   HAL_IncTick();
   
   /* USER CODE BEGIN SysTick_IRQn 1 */
-  GetFrequency();
+
   /* USER CODE END SysTick_IRQn 1 */
 }
 
 /* USER CODE BEGIN 1 */
+
+void EXTI9_5_IRQHandler(void)
+{
+
+HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_8);
+BSP_IO_ITClear();
+  
+
+}
+
+
 void EXTI15_10_IRQHandler (void)
 {
-  if (counter_start == 0)
-  {
-    HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
-    counter_start++;
-  }
+
+HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_13);
+__HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_13);
+if (counter_start == 0)
+{
+HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
+  counter_start++;
+}
   else
-  {
-    HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_1);
-    counter_start--;
-  }
+{
+  HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_1);
+counter_start--;
+}
+
 }
 /* USER CODE END 1 */
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

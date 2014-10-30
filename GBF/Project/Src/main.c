@@ -39,15 +39,20 @@
 #include "stm324x9i_eval.h"
 #include "stm324x9i_eval_io.h"
 #include "stm324x9i_eval_lcd.h"
+#include "lcd_log.h"
+#include "stdlib.h"
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
 TIM_HandleTypeDef htim1;
 
 /* USER CODE BEGIN PV */
-uint8_t buffer_HZ[1] = {0};
-uint8_t buffer_KHZ[1] = {0};
-uint8_t buffer_MHZ[1] = {0};
+char buffer_HZ[4] = "000";
+char buffer_KHZ[4] = "000";
+char buffer_MHZ[4] = "000";
+int counter = 0;
+int multiplier = 10;
+int frequency = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -84,14 +89,26 @@ int main(void)
   MX_TIM1_Init();
 
   /* USER CODE BEGIN 2 */
-  BSP_JOY_Init(JOY_MODE_GPIO);
-  BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_EXTI);
+  BSP_JOY_Init(JOY_MODE_EXTI);
+  BSP_PB_Init(BUTTON_TAMPER, BUTTON_MODE_EXTI);
   
+  BSP_IO_Init();
   BSP_LCD_Init();
+  
+  BSP_LCD_LayerDefaultInit(0, LCD_FB_START_ADDRESS); 
+  BSP_LCD_SelectLayer(0);
+  
   BSP_LCD_DisplayOn();
-  BSP_LCD_DisplayStringAtLine(1, buffer_HZ);
-  BSP_LCD_DisplayStringAtLine(2, buffer_KHZ);
-  BSP_LCD_DisplayStringAtLine(3, buffer_MHZ);
+  LCD_LOG_Init();
+  
+  BSP_LCD_Clear(LCD_COLOR_BLACK);
+  
+  BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
+  BSP_LCD_SetBackColor(LCD_COLOR_RED);
+  LCD_LOG_SetHeader((uint8_t *)" Low Frequency Generator");
+//  BSP_LCD_DisplayStringAtLine(5, (uint8_t *)buffer_HZ[4]);
+//  BSP_LCD_DisplayStringAtLine(6, (uint8_t *)buffer_KHZ[4]);
+//  BSP_LCD_DisplayStringAtLine(7, (uint8_t *)buffer_MHZ[4]);
   
   
   /* USER CODE END 2 */
@@ -141,6 +158,8 @@ void SystemClock_Config(void)
   HAL_RCC_MCOConfig(RCC_MCO2, RCC_MCO2SOURCE_HSE, RCC_MCODIV_1);
 
 }
+
+
 
 /* TIM1 init function */
 void MX_TIM1_Init(void)
@@ -202,119 +221,142 @@ void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+void HAL_GPIO_EXTI_Callback(uint16_t gpio)
+{
+  GetFrequency();
+}
+
+
 void GetFrequency(void)
 {
-  int counter = 0;
-  int frequency = 0;
-  BSP_LCD_DisplayStringAtLine(5, "HZ");
+  
+//  int frequency = 0;
+  
     
   switch(BSP_JOY_GetState())
   {
   
   case JOY_SEL:
-  frequency = buffer_HZ[1] + (buffer_KHZ[1]*1000) + (buffer_MHZ[1]*1000000);
+  //frequency = buffer_HZ[1] + (buffer_KHZ[1]*1000) + (buffer_MHZ[1]*1000000);
   TimerUpdate(frequency);
   break;
   
   case JOY_LEFT:
-    counter++;
+    
     if( counter ==0 )
     {
-      BSP_LCD_ClearStringLine(5);
-      BSP_LCD_DisplayStringAtLine(5, "HZ");
+      multiplier = 10;
+      counter++;
+//      BSP_LCD_ClearStringLine(10);
+//      BSP_LCD_DisplayStringAtLine(10, "HZ");
     }
     
     else if( counter ==1)
     {
-      BSP_LCD_ClearStringLine(5);
-      BSP_LCD_DisplayStringAtLine(5, "KHZ");
+      multiplier = 1000;
+      counter++;
+//      BSP_LCD_ClearStringLine(10);
+//      BSP_LCD_DisplayStringAtLine(10, "KHZ");
     }
     
     else if( counter ==2)
     {
-      BSP_LCD_ClearStringLine(5);
-      BSP_LCD_DisplayStringAtLine(5, "MHZ");
+      multiplier = 1000000;
+      counter++;
+//      BSP_LCD_ClearStringLine(10);
+//      BSP_LCD_DisplayStringAtLine(10, "MHZ");
     }
-    else if (counter == 3)
+    else
     {
-      BSP_LCD_ClearStringLine(5);
+//      BSP_LCD_ClearStringLine(10);
       counter = 0;
-      BSP_LCD_DisplayStringAtLine(5, "HZ");
+      multiplier = 10;
+//      BSP_LCD_DisplayStringAtLine(10, "HZ");
     }
   break;  
     
   
   
   case JOY_RIGHT:
-    counter--;
+    
     if( counter ==0 )
     {
-      BSP_LCD_ClearStringLine(5);
-      BSP_LCD_DisplayStringAtLine(5, "HZ");
+      multiplier = 10;
+      counter--;
+//      BSP_LCD_ClearStringLine(10);
+//      BSP_LCD_DisplayStringAtLine(10, "HZ");
     }
     
     else if( counter ==1)
     {
-      BSP_LCD_ClearStringLine(5);
-      BSP_LCD_DisplayStringAtLine(5, "KHZ");
+      multiplier = 1000;
+      counter--;
+//      BSP_LCD_ClearStringLine(10);
+//      BSP_LCD_DisplayStringAtLine(10, "KHZ");
     }
     
     else if( counter ==2)
     {
-      BSP_LCD_ClearStringLine(5);
-      BSP_LCD_DisplayStringAtLine(5, "MHZ");
+      multiplier = 1000000;
+      counter--;
+//      BSP_LCD_ClearStringLine(10);
+//      BSP_LCD_DisplayStringAtLine(10, "MHZ");
     }
-    else if (counter == -1)
+    else 
     {
-      BSP_LCD_ClearStringLine(5);
+//      BSP_LCD_ClearStringLine(10);
+      multiplier = 10;
       counter = 2;
-      BSP_LCD_DisplayStringAtLine(5, "MHZ");
+//      BSP_LCD_DisplayStringAtLine(10, "MHZ");
     }
     break;
     
   case JOY_DOWN:
-    if (counter ==0)
-    {
-      buffer_HZ[1] = buffer_HZ[1] -1;
-      BSP_LCD_ClearStringLine(1);
-      BSP_LCD_DisplayStringAtLine(1, buffer_HZ);
-    }
-    else if (counter ==1)
-    {
-      buffer_KHZ[1] = buffer_KHZ[1] -1;
-      BSP_LCD_ClearStringLine(2);
-      BSP_LCD_DisplayStringAtLine(2, buffer_KHZ);
-    }
-    else if (counter ==2)
-    {
-      buffer_MHZ[1] = buffer_MHZ[1] -1;
-      BSP_LCD_ClearStringLine(3);
-      BSP_LCD_DisplayStringAtLine(3, buffer_MHZ);
-    }
+//    if (counter ==0)
+//    {
+      frequency = frequency - multiplier;
+//      buffer_HZ[1] = buffer_HZ[1] -1;
+//      BSP_LCD_ClearStringLine(5);
+//      BSP_LCD_DisplayStringAtLine(5, buffer_HZ);
+//    }
+//    else if (counter ==1)
+//    {
+//      buffer_KHZ[1] = buffer_KHZ[1] -1;
+//      BSP_LCD_ClearStringLine(6);
+//      BSP_LCD_DisplayStringAtLine(6, buffer_KHZ);
+//    }
+//    else if (counter ==2)
+//    {
+//      buffer_MHZ[1] = buffer_MHZ[1] -1;
+//      BSP_LCD_ClearStringLine(7);
+//      BSP_LCD_DisplayStringAtLine(7, buffer_MHZ);
+//    }
     
 
 
   break;
     
   case JOY_UP:
-    if (counter ==0)
-    {
-      buffer_HZ[1] = buffer_HZ[1] +1;
-      BSP_LCD_ClearStringLine(1);
-      BSP_LCD_DisplayStringAtLine(1, buffer_HZ);
-    }
-    else if (counter ==1)
-    {
-      buffer_KHZ[1] = buffer_KHZ[1] +1;
-      BSP_LCD_ClearStringLine(2);
-      BSP_LCD_DisplayStringAtLine(2, buffer_KHZ);
-    }
-    else if (counter ==2)
-    {
-      buffer_MHZ[1] = buffer_MHZ[1] +1;
-      BSP_LCD_ClearStringLine(3);
-      BSP_LCD_DisplayStringAtLine(3, buffer_MHZ);
-    }
+    frequency = frequency + multiplier;
+//    if (counter ==0)
+//    {
+//      buffer_HZ[1] = buffer_HZ[1] +1;
+//      BSP_LCD_ClearStringLine(5);
+//      BSP_LCD_DisplayStringAtLine(5, buffer_HZ);
+//    }
+//    else if (counter ==1)
+//    {
+//      buffer_KHZ[1] = buffer_KHZ[1] +1;
+//      BSP_LCD_ClearStringLine(6);
+//      BSP_LCD_DisplayStringAtLine(6, buffer_KHZ);
+//    }
+//    else if (counter ==2)
+//    {
+//      buffer_MHZ[1] = buffer_MHZ[1] +1;
+//      BSP_LCD_ClearStringLine(7);
+//      BSP_LCD_DisplayStringAtLine(7, buffer_MHZ);
+//    }
     
 
   break;
@@ -336,14 +378,14 @@ void GetFrequency(void)
 void TimerUpdate(int frequency)
 {
   int prescaler = 0;
-  int TimFrequency = 86000000;
+  int TimFrequency = 168000000;
   
   while (((TimFrequency/(prescaler+1))/(frequency)) >= 0xFFFF)
   {
     prescaler ++;
   }
   
-  TIM1->PSC = prescaler;
+  TIM1->PSC = (prescaler);
   TIM1->ARR = ((TimFrequency/(prescaler+1))/(frequency))-1;
   TIM1->CCR1 = (TIM1->ARR)/2;
 }
