@@ -39,8 +39,10 @@
 #include "stm324x9i_eval.h"
 #include "stm324x9i_eval_io.h"
 #include "stm324x9i_eval_lcd.h"
+#include "stm324x9i_eval_ts.h"
 #include "lcd_log.h"
 #include "stdlib.h"
+#include "background.h"
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
@@ -51,8 +53,13 @@ char buffer_HZ[4] = "000";
 char buffer_KHZ[4] = "000";
 char buffer_MHZ[4] = "000";
 int counter = 0;
-int multiplier = 10;
+int multiplier = 1;
 int frequency = 0;
+TS_StateTypeDef cord;
+uint16_t y ;
+uint16_t x;
+int counter_start = 0;
+char frequency_c[20];
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -94,6 +101,9 @@ int main(void)
   
   BSP_IO_Init();
   BSP_LCD_Init();
+  BSP_TS_Init(BSP_LCD_GetXSize(), BSP_LCD_GetYSize());
+  BSP_TS_ITConfig();
+  
   
   BSP_LCD_LayerDefaultInit(0, LCD_FB_START_ADDRESS); 
   BSP_LCD_SelectLayer(0);
@@ -106,6 +116,8 @@ int main(void)
   BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
   BSP_LCD_SetBackColor(LCD_COLOR_RED);
   LCD_LOG_SetHeader((uint8_t *)" Low Frequency Generator");
+  BSP_LCD_DrawBitmap(0, 0, (uint8_t *)background);
+  BSP_LCD_SetFont(&Font24);
 //  BSP_LCD_DisplayStringAtLine(5, (uint8_t *)buffer_HZ[4]);
 //  BSP_LCD_DisplayStringAtLine(6, (uint8_t *)buffer_KHZ[4]);
 //  BSP_LCD_DisplayStringAtLine(7, (uint8_t *)buffer_MHZ[4]);
@@ -153,9 +165,6 @@ void SystemClock_Config(void)
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
 
-  HAL_RCC_MCOConfig(RCC_MCO1, RCC_MCO1SOURCE_PLLCLK, RCC_MCODIV_2);
-
-  HAL_RCC_MCOConfig(RCC_MCO2, RCC_MCO2SOURCE_HSE, RCC_MCODIV_1);
 
 }
 
@@ -193,181 +202,232 @@ void MX_TIM1_Init(void)
 */
 void MX_GPIO_Init(void)
 {
-
-  GPIO_InitTypeDef GPIO_InitStruct;
-
   /* GPIO Ports Clock Enable */
   __GPIOC_CLK_ENABLE();
   __GPIOA_CLK_ENABLE();
   __GPIOH_CLK_ENABLE();
   __GPIOE_CLK_ENABLE();
-
-  /*Configure GPIO pin : PC9 */
-  GPIO_InitStruct.Pin = GPIO_PIN_9;
-  GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_LOW;
-  GPIO_InitStruct.Alternate = GPIO_AF0_MCO;
-  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
-
-  /*Configure GPIO pin : PA8 */
-  GPIO_InitStruct.Pin = GPIO_PIN_8;
-  GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_LOW;
-  GPIO_InitStruct.Alternate = GPIO_AF0_MCO;
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
 }
 
 /* USER CODE BEGIN 4 */
 
 void HAL_GPIO_EXTI_Callback(uint16_t gpio)
 {
+  if (gpio == GPIO_PIN_8)
+  {
   GetFrequency();
+  }
 }
 
 
 void GetFrequency(void)
 {
   
-//  int frequency = 0;
+
+BSP_TS_GetState(&cord);
   
-    
-  switch(BSP_JOY_GetState())
+     y = cord.y;
+     x = cord.x;
+
+if (cord.TouchDetected == 1)
+{
+  if ((y>=228) && (y<=260))
   {
-  
-  case JOY_SEL:
-  //frequency = buffer_HZ[1] + (buffer_KHZ[1]*1000) + (buffer_MHZ[1]*1000000);
-  TimerUpdate(frequency);
-  break;
-  
-  case JOY_LEFT:
-    
-    if( counter ==0 )
+    if ((x>=1) && (x<=46))
     {
-      multiplier = 10;
-      counter++;
-//      BSP_LCD_ClearStringLine(10);
-//      BSP_LCD_DisplayStringAtLine(10, "HZ");
+      multiplier = 10000000;
     }
-    
-    else if( counter ==1)
-    {
-      multiplier = 1000;
-      counter++;
-//      BSP_LCD_ClearStringLine(10);
-//      BSP_LCD_DisplayStringAtLine(10, "KHZ");
-    }
-    
-    else if( counter ==2)
+        if ((x>=46) && (x<=72))
     {
       multiplier = 1000000;
-      counter++;
-//      BSP_LCD_ClearStringLine(10);
-//      BSP_LCD_DisplayStringAtLine(10, "MHZ");
     }
-    else
+        if ((x>=72) && (x<=108))
     {
-//      BSP_LCD_ClearStringLine(10);
-      counter = 0;
-      multiplier = 10;
-//      BSP_LCD_DisplayStringAtLine(10, "HZ");
+      multiplier = 100000;
     }
-  break;  
-    
-  
-  
-  case JOY_RIGHT:
-    
-    if( counter ==0 )
+        if ((x>=108) && (x<=140))
     {
-      multiplier = 10;
-      counter--;
-//      BSP_LCD_ClearStringLine(10);
-//      BSP_LCD_DisplayStringAtLine(10, "HZ");
+      multiplier = 10000;
     }
-    
-    else if( counter ==1)
+        if ((x>=140) && (x<=174))
     {
       multiplier = 1000;
-      counter--;
-//      BSP_LCD_ClearStringLine(10);
-//      BSP_LCD_DisplayStringAtLine(10, "KHZ");
     }
-    
-    else if( counter ==2)
+        if ((x>=174) && (x<=207))
     {
-      multiplier = 1000000;
-      counter--;
-//      BSP_LCD_ClearStringLine(10);
-//      BSP_LCD_DisplayStringAtLine(10, "MHZ");
+      multiplier = 100;
     }
-    else 
+        if ((x>=207) && (x<=232))
     {
-//      BSP_LCD_ClearStringLine(10);
       multiplier = 10;
-      counter = 2;
-//      BSP_LCD_DisplayStringAtLine(10, "MHZ");
     }
-    break;
+        if ((x>=232) && (x<=261))
+    {
+      multiplier = 1;
+    }
     
-  case JOY_DOWN:
-//    if (counter ==0)
-//    {
-      frequency = frequency - multiplier;
-//      buffer_HZ[1] = buffer_HZ[1] -1;
-//      BSP_LCD_ClearStringLine(5);
-//      BSP_LCD_DisplayStringAtLine(5, buffer_HZ);
-//    }
-//    else if (counter ==1)
-//    {
-//      buffer_KHZ[1] = buffer_KHZ[1] -1;
-//      BSP_LCD_ClearStringLine(6);
-//      BSP_LCD_DisplayStringAtLine(6, buffer_KHZ);
-//    }
-//    else if (counter ==2)
-//    {
-//      buffer_MHZ[1] = buffer_MHZ[1] -1;
-//      BSP_LCD_ClearStringLine(7);
-//      BSP_LCD_DisplayStringAtLine(7, buffer_MHZ);
-//    }
-    
-
-
-  break;
-    
-  case JOY_UP:
-    frequency = frequency + multiplier;
-//    if (counter ==0)
-//    {
-//      buffer_HZ[1] = buffer_HZ[1] +1;
-//      BSP_LCD_ClearStringLine(5);
-//      BSP_LCD_DisplayStringAtLine(5, buffer_HZ);
-//    }
-//    else if (counter ==1)
-//    {
-//      buffer_KHZ[1] = buffer_KHZ[1] +1;
-//      BSP_LCD_ClearStringLine(6);
-//      BSP_LCD_DisplayStringAtLine(6, buffer_KHZ);
-//    }
-//    else if (counter ==2)
-//    {
-//      buffer_MHZ[1] = buffer_MHZ[1] +1;
-//      BSP_LCD_ClearStringLine(7);
-//      BSP_LCD_DisplayStringAtLine(7, buffer_MHZ);
-//    }
-    
-
-  break;
-    
-  default:
-    break;
-    
-    
-    
-    
+    if ((x>=261))
+    {
+      if (counter_start == 0)
+      {
+        HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
+        counter_start++;
+      }
+      else
+      {
+        HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_1);
+        counter_start--;
+      }
+    }
   }
+  
+  if ((x>=418) && (x<=460))
+  {
+    if ((y>=38) && (y<=84))
+    {
+      frequency = frequency + multiplier;
+      sprintf(frequency_c,"%d",frequency);
+      BSP_LCD_DisplayStringAtLine(7, (uint8_t *)frequency_c);
+      
+    }
+    if ((y>=84) && (y<=142))
+    {
+      frequency = frequency - multiplier;
+      sprintf(frequency_c,"%d",frequency);
+      BSP_LCD_DisplayStringAtLine(7, (uint8_t *)frequency_c);
+    }
+    
+    if ((y>=142) && (y<=180))
+    {
+      TimerUpdate(frequency);
+      sprintf(frequency_c,"%d",frequency);
+      BSP_LCD_DisplayStringAtLine(4, (uint8_t *)frequency_c);
+    }
+  }
+
+    
+}
+//  switch(BSP_JOY_GetState())
+//  {
+//  
+//  case JOY_SEL:
+//  
+//  TimerUpdate(frequency);
+//  break;
+//  
+//  case JOY_LEFT:
+//          counter++;
+//
+//    if( counter ==0 )
+//    {
+//      multiplier = 1;
+//    }
+//    
+//    else if( counter ==1)
+//    {
+//      multiplier = 10;
+//    }
+//    
+//    else if( counter ==2)
+//    {
+//      multiplier = 100;
+//    }
+//    else if( counter ==3)
+//    {
+//      multiplier = 1000;
+//    }
+//    
+//    else if( counter ==4)
+//    {
+//      multiplier = 10000;
+//    }
+//    else if( counter ==5)
+//    {
+//      multiplier = 100000;
+//    }
+//    
+//    else if( counter ==6)
+//    {
+//      multiplier = 1000000;
+//    }
+//    
+//    else if( counter ==7)
+//    {
+//      multiplier = 10000000;
+//    }
+//    
+//    else if( counter >7)
+//    {
+//      multiplier = 1;
+//      counter = 0;
+//      
+//    }
+//
+//  break;  
+//    
+//  
+//  
+//  case JOY_RIGHT:
+//    
+//    counter--;
+//    if( counter ==0 )
+//    {
+//      multiplier = 1;
+//    }
+//    
+//    else if( counter ==1)
+//    {
+//      multiplier = 10;
+//    }
+//    
+//    else if( counter ==2)
+//    {
+//      multiplier = 100;
+//    }
+//    else if( counter ==3)
+//    {
+//      multiplier = 1000;
+//    }
+//    
+//    else if( counter ==4)
+//    {
+//      multiplier = 10000;
+//    }
+//    else if( counter ==5)
+//    {
+//      multiplier = 100000;
+//    }
+//    
+//    else if( counter ==6)
+//    {
+//      multiplier = 1000000;
+//    }
+//    
+//    else if( counter ==7)
+//    {
+//      multiplier = 10000000;
+//    }
+//    
+//    else if( counter < 0)
+//    {
+//      multiplier = 10000000;
+//      counter = 7;
+//    }
+//    break;
+//    
+//  case JOY_DOWN:
+//
+//      frequency = frequency - multiplier;
+//  break;
+//    
+//  case JOY_UP:
+//    frequency = frequency + multiplier;
+//  break;
+//    
+//  default:
+//    break;
+//    
+//  }
 
 }
 

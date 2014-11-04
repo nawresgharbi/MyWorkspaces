@@ -513,3 +513,5 @@ ErrorStatus LCD_LOG_ScrollForward(void)
 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+
+

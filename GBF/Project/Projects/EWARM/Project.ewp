@@ -997,10 +997,16 @@
         <name>$PROJ_DIR$\..\..\Drivers\BSP\STM324x9I_EVAL\stm324x9i_eval_sdram.c</name>
       </file>
       <file>
+        <name>$PROJ_DIR$\..\..\Drivers\BSP\STM324x9I_EVAL\stm324x9i_eval_ts.c</name>
+      </file>
+      <file>
         <name>$PROJ_DIR$\..\..\Drivers\BSP\Components\stmpe1600\stmpe1600.c</name>
       </file>
       <file>
         <name>$PROJ_DIR$\..\..\Drivers\BSP\Components\stmpe811\stmpe811.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\Drivers\BSP\Components\ts3510\ts3510.c</name>
       </file>
     </group>
     <group>
