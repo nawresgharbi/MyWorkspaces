@@ -67,15 +67,16 @@ void SysTick_Handler(void)
 void EXTI0_IRQHandler(void)
 {
 HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_0);
-//BSP_IO_ITClear();
+BSP_IO_ITClear();
 BSP_TS_ITClear();
 }
 
 void EXTI9_5_IRQHandler(void)
 {
 HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_8);
-HAL_Delay(200);
+HAL_Delay(50);
 BSP_TS_ITClear();
+BSP_IO_ITClear();
 
 }
 

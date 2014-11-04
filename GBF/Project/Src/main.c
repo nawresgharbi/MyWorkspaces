@@ -44,6 +44,7 @@
 #include "stdlib.h"
 #include "background.h"
 #include "string.h"
+#include "math.h"
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
@@ -62,6 +63,8 @@ uint16_t x;
 int counter_start = 0;
 char frequency_c[20];
 char frequency_display[20];
+int multiplier_keyboard = 10;
+int last_add = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -76,7 +79,7 @@ void frequency_displayer(int frequency);
 /* USER CODE END PFP */
 
 /* USER CODE BEGIN 0 */
-
+#define USE_JOYSTICK
 /* USER CODE END 0 */
 
 int main(void)
@@ -124,11 +127,17 @@ int main(void)
   BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
   
   frequency = 10000;
+  multiplier = 10000;
   TimerUpdate(frequency);
-  sprintf(frequency_c,"%d",frequency);
-  strcat(frequency_c, "  Hz");
-  BSP_LCD_DisplayStringAtLine(4, (uint8_t *)frequency_c);
-  BSP_LCD_DisplayStringAtLine(7, (uint8_t *)frequency_c);
+
+  frequency_displayer( frequency);
+  BSP_LCD_DisplayStringAtLine(4, (uint8_t *)frequency_display);
+  BSP_LCD_DisplayStringAtLine(7, (uint8_t *)frequency_display);
+  BSP_LCD_SetFont(&Font16);
+  BSP_LCD_DisplayStringAtLine(12, (uint8_t *)"OFF");
+  BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"10 KHz");
+  BSP_LCD_SetFont(&Font24);
+  
 
   
   
@@ -245,34 +254,67 @@ if (cord.TouchDetected == 1)
     if ((x>=1) && (x<=46))
     {
       multiplier = 10000000;
+      BSP_LCD_SetFont(&Font16);
+      BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"             ");
+      BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"10 MHz");
+      BSP_LCD_SetFont(&Font24);
+      
     }
         if ((x>=46) && (x<=72))
     {
       multiplier = 1000000;
+      BSP_LCD_SetFont(&Font16);
+      BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"             ");
+      BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"1 MHz");
+      BSP_LCD_SetFont(&Font24);
     }
         if ((x>=72) && (x<=108))
     {
       multiplier = 100000;
+      BSP_LCD_SetFont(&Font16);
+      BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"             ");
+      BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"100 KHz");
+      BSP_LCD_SetFont(&Font24);
     }
         if ((x>=108) && (x<=140))
     {
       multiplier = 10000;
+      BSP_LCD_SetFont(&Font16);
+      BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"             ");
+      BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"10 KHz");
+      BSP_LCD_SetFont(&Font24);
     }
         if ((x>=140) && (x<=174))
     {
       multiplier = 1000;
+      BSP_LCD_SetFont(&Font16);
+      BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"             ");
+      BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"1 KHz");
+      BSP_LCD_SetFont(&Font24);
     }
         if ((x>=174) && (x<=207))
     {
       multiplier = 100;
+      BSP_LCD_SetFont(&Font16);
+      BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"             ");
+      BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"100 Hz");
+      BSP_LCD_SetFont(&Font24);
     }
         if ((x>=207) && (x<=232))
     {
       multiplier = 10;
+      BSP_LCD_SetFont(&Font16);
+      BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"             ");
+      BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"10 Hz");
+      BSP_LCD_SetFont(&Font24);
     }
         if ((x>=232) && (x<=261))
     {
       multiplier = 1;
+      BSP_LCD_SetFont(&Font16);
+      BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"             ");
+      BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"1 Hz");
+      BSP_LCD_SetFont(&Font24);
     }
     
     if ((x>=261) && (x <= 430))
@@ -281,11 +323,19 @@ if (cord.TouchDetected == 1)
       {
         HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
         counter_start++;
+        BSP_LCD_SetFont(&Font16);
+        BSP_LCD_DisplayStringAtLine(12, (uint8_t *)"             ");
+        BSP_LCD_DisplayStringAtLine(12, (uint8_t *)"ON");
+        BSP_LCD_SetFont(&Font24);
       }
       else
       {
         HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_1);
         counter_start--;
+        BSP_LCD_SetFont(&Font16);
+        BSP_LCD_DisplayStringAtLine(12, (uint8_t *)"             ");
+        BSP_LCD_DisplayStringAtLine(12, (uint8_t *)"OFF");
+        BSP_LCD_SetFont(&Font24);
       }
     }
   }
@@ -295,9 +345,8 @@ if (cord.TouchDetected == 1)
     if ((y>=38) && (y<=84))
     {
       frequency = frequency + multiplier;
-//      sprintf(frequency_c,"%d",frequency);
-//      strcat(frequency_c, "  Hz");
       frequency_displayer(frequency);
+      BSP_LCD_DisplayStringAtLine(7, (uint8_t *)"               ");
       BSP_LCD_DisplayStringAtLine(7, (uint8_t *)frequency_display);
       
     }
@@ -308,32 +357,178 @@ if (cord.TouchDetected == 1)
       {
         frequency = 0;
       }
-//      sprintf(frequency_c,"%d",frequency);
-//      strcat(frequency_c, "  Hz");
+
       frequency_displayer( frequency);
+      BSP_LCD_DisplayStringAtLine(7, (uint8_t *)"               ");
       BSP_LCD_DisplayStringAtLine(7, (uint8_t *)frequency_display);
     }
     
     if ((y>=142) && (y<=180))
     {
       TimerUpdate(frequency);
-      //      sprintf(frequency_c,"%d",frequency);
-      //      strcat(frequency_c, "  Hz");
       frequency_displayer( frequency);
+      BSP_LCD_DisplayStringAtLine(4, (uint8_t *)"               ");
       BSP_LCD_DisplayStringAtLine(4, (uint8_t *)frequency_display);
     }
+    if ((y>=184) && (y<=272))
+    {
+      frequency = 0;
+      frequency_displayer( 0);
+      BSP_LCD_DisplayStringAtLine(7, (uint8_t *)"               ");
+      BSP_LCD_DisplayStringAtLine(7, (uint8_t *)frequency_display);
+      
+    }
   }
-
-    
+  
+  if ((x>=285) && (x<=375))
+  {
+    if ((y>=60) && (y<=190))
+    {
+      
+      
+      if ((x>=285) && (x<=310))
+      {
+        if ((y>=65) && (y<=90))
+        {
+          
+          frequency = 1 + (frequency * multiplier_keyboard);
+          frequency_displayer( frequency);
+          BSP_LCD_DisplayStringAtLine(7, (uint8_t *)"               ");
+          BSP_LCD_DisplayStringAtLine(7, (uint8_t *)frequency_display);
+          last_add = 1;
+          
+        }
+        if ((y>=100) && (y<=120))
+        {
+          
+          frequency = 4 + (frequency * multiplier_keyboard);
+          frequency_displayer( frequency);
+          BSP_LCD_DisplayStringAtLine(7, (uint8_t *)"               ");
+          BSP_LCD_DisplayStringAtLine(7, (uint8_t *)frequency_display);
+          last_add = 4;
+          
+        }
+        if ((y>=130) && (y<=155))
+        {
+          
+          frequency = 7 + (frequency * multiplier_keyboard);
+          frequency_displayer( frequency);
+          BSP_LCD_DisplayStringAtLine(7, (uint8_t *)"               ");
+          BSP_LCD_DisplayStringAtLine(7, (uint8_t *)frequency_display);
+          last_add = 7;
+         
+        }
+        
+        if ((y>=165) && (y<=185))
+        {
+          
+          frequency = (frequency )/multiplier_keyboard;
+          frequency_displayer( frequency);
+          BSP_LCD_DisplayStringAtLine(7, (uint8_t *)"               ");
+          BSP_LCD_DisplayStringAtLine(7, (uint8_t *)frequency_display);
+          
+        }
+      }
+      
+      if ((x>=318) && (x<=345))
+      {
+        if ((y>=65) && (y<=90))
+        {
+          
+          frequency = 2 + (frequency * multiplier_keyboard);
+          frequency_displayer( frequency);
+          BSP_LCD_DisplayStringAtLine(7, (uint8_t *)"               ");
+          BSP_LCD_DisplayStringAtLine(7, (uint8_t *)frequency_display);
+          last_add = 2;
+          
+        }
+        if ((y>=100) && (y<=120))
+        {
+          
+          frequency = 5 + (frequency * multiplier_keyboard);
+          frequency_displayer( frequency);
+          BSP_LCD_DisplayStringAtLine(7, (uint8_t *)"               ");
+          BSP_LCD_DisplayStringAtLine(7, (uint8_t *)frequency_display);
+          last_add = 5;
+         
+        }
+        if ((y>=130) && (y<=155))
+        {
+          
+          frequency = 8 + (frequency * multiplier_keyboard);
+          frequency_displayer( frequency);
+          BSP_LCD_DisplayStringAtLine(7, (uint8_t *)"               ");
+          BSP_LCD_DisplayStringAtLine(7, (uint8_t *)frequency_display);
+          last_add = 8;
+          
+        }
+        if ((y>=165) && (y<=185))
+        {
+          
+          frequency = 0 + (frequency * multiplier_keyboard);
+          frequency_displayer( frequency);
+          BSP_LCD_DisplayStringAtLine(7, (uint8_t *)"               ");
+          BSP_LCD_DisplayStringAtLine(7, (uint8_t *)frequency_display);
+          last_add = 0;
+          
+        }
+      }
+      
+      if ((x>=350) && (x<=375))
+      {
+        if ((y>=65) && (y<=90))
+        {
+          
+          frequency = 3 + (frequency * multiplier_keyboard);
+          frequency_displayer( frequency);
+          BSP_LCD_DisplayStringAtLine(7, (uint8_t *)"               ");
+          BSP_LCD_DisplayStringAtLine(7, (uint8_t *)frequency_display);
+          last_add = 3;
+          
+        }
+        if ((y>=100) && (y<=120))
+        {
+          
+          frequency = 6 + (frequency * multiplier_keyboard);
+          frequency_displayer( frequency);
+          BSP_LCD_DisplayStringAtLine(7, (uint8_t *)"               ");
+          BSP_LCD_DisplayStringAtLine(7, (uint8_t *)frequency_display);
+          last_add = 6;
+          
+        }
+        if ((y>=130) && (y<=155))
+        {
+          
+          frequency = 9 + (frequency * multiplier_keyboard);
+          frequency_displayer( frequency);
+          BSP_LCD_DisplayStringAtLine(7, (uint8_t *)"               ");
+          BSP_LCD_DisplayStringAtLine(7, (uint8_t *)frequency_display);
+          last_add = 9;
+          
+        }
+        if ((y>=165) && (y<=185))
+        {
+          
+          
+          TimerUpdate(frequency);
+          frequency_displayer( frequency);
+          BSP_LCD_DisplayStringAtLine(4, (uint8_t *)"               ");
+          BSP_LCD_DisplayStringAtLine(4, (uint8_t *)frequency_display);
+        }
+      }
+    }
+  }
 }
-
 #ifdef USE_JOYSTICK
   switch(BSP_JOY_GetState())
   {
   
   case JOY_SEL:
   
-  TimerUpdate(frequency);
+    TimerUpdate(frequency);
+    frequency_displayer( frequency);
+    BSP_LCD_DisplayStringAtLine(4, (uint8_t *)"               ");
+    BSP_LCD_DisplayStringAtLine(4, (uint8_t *)frequency_display);
   break;
   
   case JOY_LEFT:
@@ -342,45 +537,81 @@ if (cord.TouchDetected == 1)
     if( counter ==0 )
     {
       multiplier = 1;
+      BSP_LCD_SetFont(&Font16);
+      BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"             ");
+      BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"1 Hz");
+      BSP_LCD_SetFont(&Font24);
     }
     
     else if( counter ==1)
     {
       multiplier = 10;
+      BSP_LCD_SetFont(&Font16);
+      BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"             ");
+      BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"10 Hz");
+      BSP_LCD_SetFont(&Font24);
     }
     
     else if( counter ==2)
     {
       multiplier = 100;
+      BSP_LCD_SetFont(&Font16);
+      BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"             ");
+      BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"100 Hz");
+      BSP_LCD_SetFont(&Font24);
     }
     else if( counter ==3)
     {
       multiplier = 1000;
+      BSP_LCD_SetFont(&Font16);
+      BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"             ");
+      BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"1 KHz");
+      BSP_LCD_SetFont(&Font24);
     }
     
     else if( counter ==4)
     {
       multiplier = 10000;
+      BSP_LCD_SetFont(&Font16);
+      BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"             ");
+      BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"10 KHz");
+      BSP_LCD_SetFont(&Font24);
     }
     else if( counter ==5)
     {
       multiplier = 100000;
+      BSP_LCD_SetFont(&Font16);
+      BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"             ");
+      BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"100 KHz");
+      BSP_LCD_SetFont(&Font24);
     }
     
     else if( counter ==6)
     {
       multiplier = 1000000;
+      BSP_LCD_SetFont(&Font16);
+      BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"             ");
+      BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"1 MHz");
+      BSP_LCD_SetFont(&Font24);
     }
     
     else if( counter ==7)
     {
       multiplier = 10000000;
+      BSP_LCD_SetFont(&Font16);
+      BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"             ");
+      BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"10 MHz");
+      BSP_LCD_SetFont(&Font24);
     }
     
     else if( counter >7)
     {
       multiplier = 1;
       counter = 0;
+      BSP_LCD_SetFont(&Font16);
+      BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"             ");
+      BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"1 Hz");
+      BSP_LCD_SetFont(&Font24);
       
     }
 
@@ -394,55 +625,99 @@ if (cord.TouchDetected == 1)
     if( counter ==0 )
     {
       multiplier = 1;
+      BSP_LCD_SetFont(&Font16);
+      BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"             ");
+      BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"1 Hz");
+      BSP_LCD_SetFont(&Font24);
     }
     
     else if( counter ==1)
     {
       multiplier = 10;
+      BSP_LCD_SetFont(&Font16);
+      BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"             ");
+      BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"10 Hz");
+      BSP_LCD_SetFont(&Font24);
     }
     
     else if( counter ==2)
     {
       multiplier = 100;
+      BSP_LCD_SetFont(&Font16);
+      BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"             ");
+      BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"100 Hz");
+      BSP_LCD_SetFont(&Font24);
     }
     else if( counter ==3)
     {
       multiplier = 1000;
+      BSP_LCD_SetFont(&Font16);
+      BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"             ");
+      BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"1 KHz");
+      BSP_LCD_SetFont(&Font24);
     }
     
     else if( counter ==4)
     {
       multiplier = 10000;
+      BSP_LCD_SetFont(&Font16);
+      BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"             ");
+      BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"10 KHz");
+      BSP_LCD_SetFont(&Font24);
     }
     else if( counter ==5)
     {
       multiplier = 100000;
+      BSP_LCD_SetFont(&Font16);
+      BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"             ");
+      BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"100 KHz");
+      BSP_LCD_SetFont(&Font24);
     }
     
     else if( counter ==6)
     {
       multiplier = 1000000;
+      BSP_LCD_SetFont(&Font16);
+      BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"             ");
+      BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"1 MHz");
+      BSP_LCD_SetFont(&Font24);
     }
     
     else if( counter ==7)
     {
       multiplier = 10000000;
+      BSP_LCD_SetFont(&Font16);
+      BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"             ");
+      BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"10 MHz");
+      BSP_LCD_SetFont(&Font24);
     }
     
     else if( counter < 0)
     {
       multiplier = 10000000;
       counter = 7;
+      BSP_LCD_SetFont(&Font16);
+      BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"             ");
+      BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"10 MHz");
+      BSP_LCD_SetFont(&Font24);
     }
     break;
     
   case JOY_DOWN:
 
-      frequency = frequency - multiplier;
+    frequency = frequency - multiplier;
+    frequency_displayer( frequency);
+    BSP_LCD_DisplayStringAtLine(7, (uint8_t *)"               ");
+    BSP_LCD_DisplayStringAtLine(7, (uint8_t *)frequency_display);
+    last_add = 0;
   break;
     
   case JOY_UP:
     frequency = frequency + multiplier;
+    frequency_displayer( frequency);
+    BSP_LCD_DisplayStringAtLine(7, (uint8_t *)"               ");
+    BSP_LCD_DisplayStringAtLine(7, (uint8_t *)frequency_display);
+    last_add = 0;
   break;
     
   default:
@@ -450,6 +725,7 @@ if (cord.TouchDetected == 1)
     
   }
 #endif
+
 }
 
 
@@ -469,6 +745,7 @@ void TimerUpdate(int frequency)
   TIM1->PSC = (prescaler);
   TIM1->ARR = ((TimFrequency/(prescaler+1))/(frequency))-1;
   TIM1->CCR1 = (TIM1->ARR)/2;
+  
 }
 
 
@@ -485,13 +762,13 @@ void frequency_displayer(int frequency)
   
   if (divider >= 1000000)
   {
-    sprintf(frequency_display,"%d",frequency/1000000);
+    sprintf(frequency_display,"%.6f",(float)frequency/1000000);
     strcat(frequency_display, "  MHz");
   }
   
   else if (divider >= 1000)
   {
-    sprintf(frequency_display,"%d",frequency/1000);
+    sprintf(frequency_display,"%.3f",(float)frequency/1000);
     strcat(frequency_display, "  KHz");
   }
   

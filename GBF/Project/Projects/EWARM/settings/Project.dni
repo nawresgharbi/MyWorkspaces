@@ -12,7 +12,7 @@ ByteLimit=50
 stlinkserialNo=2798FD0D
 stlinkfoundProbes=
 [DebugChecksum]
-Checksum=425218266
+Checksum=-527967494
 [Exceptions]
 StopOnUncaught=_ 0
 StopOnThrow=_ 0
@@ -81,5 +81,8 @@ mode=0
 [Breakpoints2]
 Count=0
 [Aliases]
-Count=0
-SuppressDialog=0
+A0=_ "C:\Users\gharbin\Desktop\My Work\my workspaces\GBF\Project\Drivers\CMSIS\Include\core_cm4.h" ""
+A1=_ "C:\Users\gharbin\Desktop\My Work\my workspaces\GBF\Project\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_cortex.c" ""
+A2=_ "C:\Users\gharbin\Desktop\My Work\my workspaces\GBF\Project\Src\main.c" ""
+Count=3
+SuppressDialog=1
