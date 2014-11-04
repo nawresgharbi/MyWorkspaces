@@ -43,6 +43,7 @@
 #include "lcd_log.h"
 #include "stdlib.h"
 #include "background.h"
+#include "string.h"
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
@@ -60,6 +61,7 @@ uint16_t y ;
 uint16_t x;
 int counter_start = 0;
 char frequency_c[20];
+char frequency_display[20];
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -70,6 +72,7 @@ static void MX_TIM1_Init(void);
 /* USER CODE BEGIN PFP */
 void GetFrequency(void);
 void TimerUpdate(int frequency);
+void frequency_displayer(int frequency);
 /* USER CODE END PFP */
 
 /* USER CODE BEGIN 0 */
@@ -115,12 +118,18 @@ int main(void)
   
   BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
   BSP_LCD_SetBackColor(LCD_COLOR_RED);
-  LCD_LOG_SetHeader((uint8_t *)" Low Frequency Generator");
   BSP_LCD_DrawBitmap(0, 0, (uint8_t *)background);
   BSP_LCD_SetFont(&Font24);
-//  BSP_LCD_DisplayStringAtLine(5, (uint8_t *)buffer_HZ[4]);
-//  BSP_LCD_DisplayStringAtLine(6, (uint8_t *)buffer_KHZ[4]);
-//  BSP_LCD_DisplayStringAtLine(7, (uint8_t *)buffer_MHZ[4]);
+  BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
+  BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
+  
+  frequency = 10000;
+  TimerUpdate(frequency);
+  sprintf(frequency_c,"%d",frequency);
+  strcat(frequency_c, "  Hz");
+  BSP_LCD_DisplayStringAtLine(4, (uint8_t *)frequency_c);
+  BSP_LCD_DisplayStringAtLine(7, (uint8_t *)frequency_c);
+
   
   
   /* USER CODE END 2 */
@@ -266,7 +275,7 @@ if (cord.TouchDetected == 1)
       multiplier = 1;
     }
     
-    if ((x>=261))
+    if ((x>=261) && (x <= 430))
     {
       if (counter_start == 0)
       {
@@ -286,149 +295,161 @@ if (cord.TouchDetected == 1)
     if ((y>=38) && (y<=84))
     {
       frequency = frequency + multiplier;
-      sprintf(frequency_c,"%d",frequency);
-      BSP_LCD_DisplayStringAtLine(7, (uint8_t *)frequency_c);
+//      sprintf(frequency_c,"%d",frequency);
+//      strcat(frequency_c, "  Hz");
+      frequency_displayer(frequency);
+      BSP_LCD_DisplayStringAtLine(7, (uint8_t *)frequency_display);
       
     }
     if ((y>=84) && (y<=142))
     {
       frequency = frequency - multiplier;
-      sprintf(frequency_c,"%d",frequency);
-      BSP_LCD_DisplayStringAtLine(7, (uint8_t *)frequency_c);
+      if (frequency < 0)
+      {
+        frequency = 0;
+      }
+//      sprintf(frequency_c,"%d",frequency);
+//      strcat(frequency_c, "  Hz");
+      frequency_displayer( frequency);
+      BSP_LCD_DisplayStringAtLine(7, (uint8_t *)frequency_display);
     }
     
     if ((y>=142) && (y<=180))
     {
       TimerUpdate(frequency);
-      sprintf(frequency_c,"%d",frequency);
-      BSP_LCD_DisplayStringAtLine(4, (uint8_t *)frequency_c);
+      //      sprintf(frequency_c,"%d",frequency);
+      //      strcat(frequency_c, "  Hz");
+      frequency_displayer( frequency);
+      BSP_LCD_DisplayStringAtLine(4, (uint8_t *)frequency_display);
     }
   }
 
     
 }
-//  switch(BSP_JOY_GetState())
-//  {
-//  
-//  case JOY_SEL:
-//  
-//  TimerUpdate(frequency);
-//  break;
-//  
-//  case JOY_LEFT:
-//          counter++;
-//
-//    if( counter ==0 )
-//    {
-//      multiplier = 1;
-//    }
-//    
-//    else if( counter ==1)
-//    {
-//      multiplier = 10;
-//    }
-//    
-//    else if( counter ==2)
-//    {
-//      multiplier = 100;
-//    }
-//    else if( counter ==3)
-//    {
-//      multiplier = 1000;
-//    }
-//    
-//    else if( counter ==4)
-//    {
-//      multiplier = 10000;
-//    }
-//    else if( counter ==5)
-//    {
-//      multiplier = 100000;
-//    }
-//    
-//    else if( counter ==6)
-//    {
-//      multiplier = 1000000;
-//    }
-//    
-//    else if( counter ==7)
-//    {
-//      multiplier = 10000000;
-//    }
-//    
-//    else if( counter >7)
-//    {
-//      multiplier = 1;
-//      counter = 0;
-//      
-//    }
-//
-//  break;  
-//    
-//  
-//  
-//  case JOY_RIGHT:
-//    
-//    counter--;
-//    if( counter ==0 )
-//    {
-//      multiplier = 1;
-//    }
-//    
-//    else if( counter ==1)
-//    {
-//      multiplier = 10;
-//    }
-//    
-//    else if( counter ==2)
-//    {
-//      multiplier = 100;
-//    }
-//    else if( counter ==3)
-//    {
-//      multiplier = 1000;
-//    }
-//    
-//    else if( counter ==4)
-//    {
-//      multiplier = 10000;
-//    }
-//    else if( counter ==5)
-//    {
-//      multiplier = 100000;
-//    }
-//    
-//    else if( counter ==6)
-//    {
-//      multiplier = 1000000;
-//    }
-//    
-//    else if( counter ==7)
-//    {
-//      multiplier = 10000000;
-//    }
-//    
-//    else if( counter < 0)
-//    {
-//      multiplier = 10000000;
-//      counter = 7;
-//    }
-//    break;
-//    
-//  case JOY_DOWN:
-//
-//      frequency = frequency - multiplier;
-//  break;
-//    
-//  case JOY_UP:
-//    frequency = frequency + multiplier;
-//  break;
-//    
-//  default:
-//    break;
-//    
-//  }
 
+#ifdef USE_JOYSTICK
+  switch(BSP_JOY_GetState())
+  {
+  
+  case JOY_SEL:
+  
+  TimerUpdate(frequency);
+  break;
+  
+  case JOY_LEFT:
+          counter++;
+
+    if( counter ==0 )
+    {
+      multiplier = 1;
+    }
+    
+    else if( counter ==1)
+    {
+      multiplier = 10;
+    }
+    
+    else if( counter ==2)
+    {
+      multiplier = 100;
+    }
+    else if( counter ==3)
+    {
+      multiplier = 1000;
+    }
+    
+    else if( counter ==4)
+    {
+      multiplier = 10000;
+    }
+    else if( counter ==5)
+    {
+      multiplier = 100000;
+    }
+    
+    else if( counter ==6)
+    {
+      multiplier = 1000000;
+    }
+    
+    else if( counter ==7)
+    {
+      multiplier = 10000000;
+    }
+    
+    else if( counter >7)
+    {
+      multiplier = 1;
+      counter = 0;
+      
+    }
+
+  break;  
+    
+  
+  
+  case JOY_RIGHT:
+    
+    counter--;
+    if( counter ==0 )
+    {
+      multiplier = 1;
+    }
+    
+    else if( counter ==1)
+    {
+      multiplier = 10;
+    }
+    
+    else if( counter ==2)
+    {
+      multiplier = 100;
+    }
+    else if( counter ==3)
+    {
+      multiplier = 1000;
+    }
+    
+    else if( counter ==4)
+    {
+      multiplier = 10000;
+    }
+    else if( counter ==5)
+    {
+      multiplier = 100000;
+    }
+    
+    else if( counter ==6)
+    {
+      multiplier = 1000000;
+    }
+    
+    else if( counter ==7)
+    {
+      multiplier = 10000000;
+    }
+    
+    else if( counter < 0)
+    {
+      multiplier = 10000000;
+      counter = 7;
+    }
+    break;
+    
+  case JOY_DOWN:
+
+      frequency = frequency - multiplier;
+  break;
+    
+  case JOY_UP:
+    frequency = frequency + multiplier;
+  break;
+    
+  default:
+    break;
+    
+  }
+#endif
 }
 
 
@@ -448,6 +469,40 @@ void TimerUpdate(int frequency)
   TIM1->PSC = (prescaler);
   TIM1->ARR = ((TimFrequency/(prescaler+1))/(frequency))-1;
   TIM1->CCR1 = (TIM1->ARR)/2;
+}
+
+
+void frequency_displayer(int frequency)
+{
+
+  int divider = 1;
+  while ((frequency / divider)>=1)
+  {
+    divider = divider * 10;
+  }
+  
+  divider = divider / 10;
+  
+  if (divider >= 1000000)
+  {
+    sprintf(frequency_display,"%d",frequency/1000000);
+    strcat(frequency_display, "  MHz");
+  }
+  
+  else if (divider >= 1000)
+  {
+    sprintf(frequency_display,"%d",frequency/1000);
+    strcat(frequency_display, "  KHz");
+  }
+  
+  else
+  {
+    sprintf(frequency_display,"%d",frequency);
+    strcat(frequency_display, "  Hz");
+  }
+  
+
+  
 }
 /* USER CODE END 4 */
 
