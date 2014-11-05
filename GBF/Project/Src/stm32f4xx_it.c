@@ -74,7 +74,7 @@ BSP_TS_ITClear();
 void EXTI9_5_IRQHandler(void)
 {
 HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_8);
-HAL_Delay(50);
+HAL_Delay(100);
 BSP_TS_ITClear();
 BSP_IO_ITClear();
 
