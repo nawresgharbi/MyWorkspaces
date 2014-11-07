@@ -138,6 +138,13 @@ int main(void)
   BSP_LCD_DisplayStringAtLine(10, (uint8_t *)"10 KHz");
   BSP_LCD_SetFont(&Font20);
   
+  BSP_LED_Init(LED1);
+  BSP_LED_Init(LED2);
+  BSP_LED_Init(LED4);
+  BSP_LED_On(LED2);
+  BSP_LED_Off(LED1);
+  BSP_LED_Off(LED4);
+  
 
   
   
@@ -199,7 +206,7 @@ void MX_TIM1_Init(void)
   htim1.Init.Prescaler = 0;
   htim1.Init.CounterMode = TIM_COUNTERMODE_UP;
   htim1.Init.Period = 0x0;
-  htim1.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim1.Init.ClockDivision = TIM_CLOCKDIVISION_DIV4;
   htim1.Init.RepetitionCounter = 0;
   HAL_TIM_PWM_Init(&htim1);
 
@@ -242,10 +249,12 @@ void GetFrequency(void)
 {
   
 
-BSP_TS_GetState(&cord);
+  BSP_TS_GetState(&cord);
   
-     y = cord.y;
-     x = cord.x;
+  y = cord.y;
+  x = cord.x;
+  
+  BSP_LED_On(LED4);
 
 if (cord.TouchDetected == 1)
 {
@@ -327,6 +336,8 @@ if (cord.TouchDetected == 1)
         BSP_LCD_DisplayStringAtLine(12, (uint8_t *)"             ");
         BSP_LCD_DisplayStringAtLine(12, (uint8_t *)"ON");
         BSP_LCD_SetFont(&Font20);
+        BSP_LED_On(LED1);
+        BSP_LED_Off(LED2);
       }
       else
       {
@@ -336,6 +347,8 @@ if (cord.TouchDetected == 1)
         BSP_LCD_DisplayStringAtLine(12, (uint8_t *)"             ");
         BSP_LCD_DisplayStringAtLine(12, (uint8_t *)"OFF");
         BSP_LCD_SetFont(&Font20);
+        BSP_LED_On(LED2);
+        BSP_LED_Off(LED1);
       }
     }
   }
@@ -529,6 +542,7 @@ if (cord.TouchDetected == 1)
     frequency_displayer( frequency);
     BSP_LCD_DisplayStringAtLine(3, (uint8_t *)"                 ");
     BSP_LCD_DisplayStringAtLine(3, (uint8_t *)frequency_display);
+
   break;
   
   case JOY_LEFT:
@@ -745,6 +759,7 @@ void TimerUpdate(int frequency)
   TIM1->PSC = (prescaler);
   TIM1->ARR = ((TimFrequency/(prescaler+1))/(frequency))-1;
   TIM1->CCR1 = (TIM1->ARR)/2;
+  BSP_LED_Off(LED4);
   
 }
 
